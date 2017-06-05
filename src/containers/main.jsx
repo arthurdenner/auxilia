@@ -4,6 +4,7 @@ import { NavLink, Route } from 'react-router-dom';
 import Informativos from './informativos';
 import Programas from './programas';
 import Selecoes from './selecoes';
+import { MenuOptions } from '../constants';
 
 const { Sider } = Layout;
 
