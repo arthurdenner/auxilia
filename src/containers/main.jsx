@@ -1,43 +1,35 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 import { NavLink, Route } from 'react-router-dom';
 import Informativos from './informativos';
 import Programas from './programas';
 import Selecoes from './selecoes';
-import { MenuOptions } from '../constants';
+import actions from '../store/actions';
+import * as selectors from '../store/selectors';
+import { menuOptions } from '../constants';
 
 const { Sider } = Layout;
 
-class Main extends Component {
+class Main extends PureComponent {
+  changeView = ({ key }) => this.props.dispatch(actions.selectTab([key]));
+
   render() {
+    const { selectedTab } = this.props;
     return (
       <Layout className="container">
-        <Sider breakpoint="lg" collapsedWidth="0">
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <NavLink to="/">
-                <span>
-                  <Icon type="info-circle-o" />
-                  <span className="nav-text">Informativos</span>
-                </span>
-              </NavLink>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <NavLink to="/programas">
-                <span>
-                  <Icon type="appstore-o" />
-                  <span className="nav-text">Programas</span>
-                </span>
-              </NavLink>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <NavLink to="/selecoes">
-                <span>
-                  <Icon type="calendar" />
-                  <span className="nav-text">Seleções</span>
-                </span>
-              </NavLink>
-            </Menu.Item>
+        <Sider>
+          <Menu theme="dark" mode="inline" selectedKeys={selectedTab} onClick={this.changeView}>
+            {menuOptions.map(option => (
+              <Menu.Item key={option.key}>
+                <NavLink to={option.route}>
+                  <span>
+                    <Icon type={option.icon} />
+                    <span className="nav-text">{option.name}</span>
+                  </span>
+                </NavLink>
+              </Menu.Item>
+            ))}
           </Menu>
         </Sider>
         <Route exact path="/" component={Informativos} />
@@ -46,6 +38,10 @@ class Main extends Component {
       </Layout>
     );
   }
-}
+};
 
-export default Main;
+const mapStateToProps = state => ({
+  selectedTab: selectors.getSelectedTab(),
+});
+
+export default connect(mapStateToProps)(Main);

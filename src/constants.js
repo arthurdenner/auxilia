@@ -1,28 +1,22 @@
-// import keyMirror from 'keymirror';
+export const appkey = 'auxilia';
 
 export const url = 'https://api.auxilia.com';
 
-// export const Menu = keyMirror({
-//   INFORMATIVOS: null,
-//   PROGRAMAS: null,
-//   SELECOES: null,
-// });
-
-export const MenuOptions = [
+export const menuOptions = [
   {
-    id: 0,
+    key: "item_1",
     route: '/',
     name: 'Informativos',
     icon: 'info-circle-o',
   },
   {
-    id: 1,
+    key: "item_2",
     route: '/programas',
     name: 'Programas',
     icon: 'appstore-o',
   },
   {
-    id: 2,
+    key: "item_3",
     route: '/selecoes',
     name: 'Seleções',
     icon: 'calendar',
