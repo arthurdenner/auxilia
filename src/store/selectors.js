@@ -1,4 +1,4 @@
-import { filter, isEmpty } from 'lodash/fp';
+import { filter, get, isEmpty } from 'lodash/fp';
 import { getData } from './configure-store';
 
 // App
@@ -15,5 +15,10 @@ export const isLogging = () => getData('auth.isLogging');
 export const isModalOpen = context => getData(`modal.${context}.isOpen`);
 
 // Programas
+export const isUserCriador = programa => get('criador._id', programa) === getUser()._id;
 export const getProgramas = () => getData('programas');
-export const getMeusProgramas = () => filter({ criador: getUser()._id }, getProgramas());
+export const getMeusProgramas = () => filter(isUserCriador, getProgramas());
+
+// Seleções
+export const geSelecoes = () => getData('selecoes');
+export const getMinhasSelecoes = () => getData('selecoes');

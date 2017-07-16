@@ -8,7 +8,10 @@ export default handleActions({
     ...state,
     {
       _id: v4(),
-      criador: getUser()._id,
+      criador: {
+        _id: getUser()._id,
+        nome: getUser().nome,
+      },
       ...payload,
     },
   ],

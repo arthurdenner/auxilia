@@ -8,7 +8,7 @@ import * as selectors from '~/store/selectors';
 // import EmptyContent from '~/components/empty-content';
 import ProgramasList from '~/components/programas';
 import CriarPrograma from './criar-programa';
-import styles from './programas.less';
+import styles from './servidor.less';
 
 const Programas = ({ programas, showModal }) => (
   <div className={styles.container}>
