@@ -2,14 +2,13 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon } from 'antd';
 import { NavLink, Route } from 'react-router-dom';
-import Informativos from './informativos';
 import Programas from './programas';
 import Selecoes from './selecoes';
 import actions from '../store/actions';
 import * as selectors from '../store/selectors';
 import { menuOptions } from '../constants';
 
-const { Sider } = Layout;
+const { Content, Header } = Layout;
 
 class Main extends PureComponent {
   changeView = ({ key }) => this.props.dispatch(actions.selectTab([key]));
@@ -18,8 +17,9 @@ class Main extends PureComponent {
     const { selectedTab } = this.props;
     return (
       <Layout className="container">
-        <Sider>
-          <Menu theme="dark" mode="inline" selectedKeys={selectedTab} onClick={this.changeView}>
+        <Header style={{ height: '50px', display: 'flex', alignItems: 'center' }}>
+          <span>AUXILIA</span>
+          <Menu theme="dark" mode="horizontal" selectedKeys={selectedTab} onClick={this.changeView}>
             {menuOptions.map(option => (
               <Menu.Item key={option.key}>
                 <NavLink to={option.route}>
@@ -31,10 +31,11 @@ class Main extends PureComponent {
               </Menu.Item>
             ))}
           </Menu>
-        </Sider>
-        <Route exact path="/" component={Informativos} />
-        <Route path="/programas" component={Programas} />
-        <Route path="/selecoes" component={Selecoes} />
+        </Header>
+        <Content>
+          <Route exact path="/" component={Programas} />
+          <Route path="/selecoes" component={Selecoes} />
+        </Content>
       </Layout>
     );
   }
