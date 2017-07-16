@@ -15,6 +15,8 @@ const selecoes = [
     Nam id leo condimentum eros euismod iaculis interdum vel augue. Morbi pulvinar tempus aliquam.
     Donec sed fringilla ante, vel tristique sem. Pellentesque purus elit, varius quis.`,
     vagas: 10,
+    dataInicio: '2017-07-10 00:00:01.000',
+    dataFinal: '2017-07-20 23:59:00.000',
   },
   {
     _id: '5651683619',
@@ -32,6 +34,8 @@ const selecoes = [
     Nam id leo condimentum eros euismod iaculis interdum vel augue. Morbi pulvinar tempus aliquam.
     Donec sed fringilla ante, vel tristique sem. Pellentesque purus elit, varius quis.`,
     vagas: 10,
+    dataInicio: '2017-07-15 00:00:01.000Z',
+    dataFinal: '2017-07-22 00:00:00.000Z',
   },
 ];
 

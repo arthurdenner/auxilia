@@ -39,6 +39,7 @@
 .modal {
   :global(.ant-modal) {
     max-width: 50% !important;
+    max-height: 90% !important;
   }
 
   :global(.ant-modal-body) {
@@ -48,8 +49,71 @@
 
 @media (max-width: 599px) {
   .modal {
+    white-space: nowrap;
+
     :global(.ant-modal) {
       max-width: 80% !important;
+    }
+
+    :global(.ant-modal-content) {
+      max-height: 100%;
+    }
+  }
+}
+
+
+.items {
+  :global(.ant-form-item):not(:last-child) {
+    width: 95%;
+
+    :global(.ant-form-item-control-wrapper) {
+      width: 95%;
+
+      :global(.ant-form-item-control) {
+        width: 100%;
+
+        :global(.ant-calendar-picker) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  :global(.ant-form-item):last-child {
+    width: 100%;
+
+    :global(.ant-form-item-control-wrapper) {
+      width: 100%;
+
+      :global(.ant-form-item-control) {
+        width: 100%;
+
+        :global(.ant-input-number) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 599px) {
+  .items {
+    flex-direction: column !important;
+
+    :global(.ant-form-item):not(:last-child) {
+      width: 100%;
+
+      :global(.ant-form-item-control-wrapper) {
+        width: 100%;
+
+        :global(.ant-form-item-control) {
+          width: 100%;
+
+          :global(.ant-calendar-picker) {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }

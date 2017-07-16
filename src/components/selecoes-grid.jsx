@@ -17,7 +17,7 @@ const getSelecoes = (programa, selecoes) => {
 const SelecoesGrid = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
-      <Collapse key={programa._id} bordered={false} className={styles.programa}>
+      <Collapse key={programa._id} className={styles.programa}>
         <Panel header={programa.nome}>
           <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
         </Panel>

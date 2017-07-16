@@ -18,6 +18,7 @@ export const isModalOpen = context => getData(`modal.${context}.isOpen`);
 export const isUserCriador = programa => get('criador._id', programa) === getUser()._id;
 export const getProgramas = () => getData('programas');
 export const getMeusProgramas = () => filter(isUserCriador, getProgramas());
+export const getPrograma = _id => filter({ _id }, getProgramas());
 
 // Seleções
 export const geSelecoes = () => getData('selecoes');
