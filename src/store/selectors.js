@@ -1,5 +1,5 @@
-import { getData } from './configure-store';
 import { isEmpty } from 'lodash';
+import { getData } from './configure-store';
 
 // App
 export const getSelectedTab = () => getData('app.selectedTab');

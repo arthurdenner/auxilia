@@ -1,20 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Icon, Layout, Menu } from 'antd';
 import { NavLink, Route } from 'react-router-dom';
+import actions from '~/store/actions';
+import * as selectors from '~/store/selectors';
+import { menuOptions } from '~/constants';
 import Programas from './programas';
 import Selecoes from './selecoes';
-import actions from '../store/actions';
-import * as selectors from '../store/selectors';
-import { menuOptions } from '../constants';
+import styles from './main.less';
 
 const { Content, Header } = Layout;
 
 const Main = ({ changeTab, selectedTab }) => (
   <Layout className="container">
-    <Header style={{ height: '50px', display: 'flex', alignItems: 'center' }}>
+    <Header className={styles.header}>
       <span>AUXILIA</span>
-      <Menu theme="dark" mode="horizontal" selectedKeys={selectedTab} onClick={changeTab}>
+      <Menu
+        className={styles.menu}
+        theme="dark" mode="horizontal"
+        selectedKeys={selectedTab} onClick={changeTab}
+      >
         {menuOptions.map(option => (
           <Menu.Item key={option.key}>
             <NavLink to={option.route}>
@@ -34,7 +40,12 @@ const Main = ({ changeTab, selectedTab }) => (
   </Layout>
 );
 
-const mapStateToProps = state => ({
+Main.propTypes = {
+  changeTab: PropTypes.func.isRequired,
+  selectedTab: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = () => ({
   selectedTab: selectors.getSelectedTab(),
 });
 

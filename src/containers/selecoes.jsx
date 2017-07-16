@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import * as selectors from '~/store/selectors';
 import SelecoesAluno from './aluno/selecoes';
 import SelecoesServidor from './servidor/selecoes';
-import * as selectors from '../store/selectors';
 
 const Selecoes = ({ typeUser }) => (
   typeUser === 'aluno' ? <SelecoesAluno /> : <SelecoesServidor />
