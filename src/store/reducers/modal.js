@@ -9,4 +9,10 @@ export default combineReducers({
       [actions.hideModalCriarPrograma]: () => false,
     }, false),
   }),
+  criarSelecao: combineReducers({
+    isOpen: handleActions({
+      [actions.showModalCriarSelecao]: () => true,
+      [actions.hideModalCriarSelecao]: () => false,
+    }, false),
+  }),
 });

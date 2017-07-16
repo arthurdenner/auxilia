@@ -7,7 +7,7 @@ import Modal from '~/components/modal';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import { nomeRules, descricaoRules } from './rules';
-import styles from './criar-programa.less';
+import styles from './criar-selecao.less';
 
 class CriarPrograma extends PureComponent {
   static propTypes = {
@@ -16,7 +16,7 @@ class CriarPrograma extends PureComponent {
     isModalOpen: PropTypes.bool.isRequired,
   };
 
-  handleClose = () => this.props.dispatch(actions.hideModalCriarPrograma());
+  handleClose = () => this.props.dispatch(actions.hideModalCriarSelecao());
 
   handleSubmit = () => {
     const { dispatch, form } = this.props;
@@ -28,9 +28,10 @@ class CriarPrograma extends PureComponent {
 
     form.validateFields((err, values) => {
       if (!err) {
-        dispatch(actions.addPrograma(values));
-        dispatch(actions.hideModalCriarPrograma());
-        notify();
+        console.log(values);
+        // dispatch(actions.addPrograma(values));
+        // dispatch(actions.hideModalCriarPrograma());
+        // notify();
       }
     });
   }
@@ -42,19 +43,19 @@ class CriarPrograma extends PureComponent {
       <Modal closable={false} footer={null} visible={isModalOpen} wrapClassName={styles.modal}>
         <FlexElement full column>
           <FlexElement align="center" justify="space-between" className={styles.header}>
-            <h3 className={styles.headerTitle}>Criar Programa</h3>
+            <h3 className={styles.headerTitle}>Criar Seleção</h3>
             <Icon type="close" onClick={this.handleClose} className={styles.icon} />
           </FlexElement>
           <FlexElement full style={{ padding: '0.2em 1em' }}>
             <Form style={{ width: '100%' }}>
-              <Form.Item hasFeedback label="Nome do programa">
+              <Form.Item hasFeedback label="Nome da seleção">
                 {form.getFieldDecorator('nome', nomeRules)(
-                  <Input placeholder="Nome do programa" />,
+                  <Input placeholder="Nome da seleção" />,
                 )}
               </Form.Item>
-              <Form.Item hasFeedback label="Descrição do programa">
+              <Form.Item hasFeedback label="Descrição da seleção">
                 {form.getFieldDecorator('descricao', descricaoRules)(
-                  <Input.TextArea rows={5} placeholder="Descrição do programa" />,
+                  <Input.TextArea rows={5} placeholder="Descrição da seleção" />,
                 )}
               </Form.Item>
             </Form>
@@ -64,7 +65,7 @@ class CriarPrograma extends PureComponent {
               Cancelar
             </Button>
             <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
-              Criar Programa
+              Criar Seleção
             </Button>
           </FlexElement>
         </FlexElement>
@@ -74,7 +75,7 @@ class CriarPrograma extends PureComponent {
 }
 
 const mapStateToProps = () => ({
-  isModalOpen: selectors.isModalOpen('criarPrograma'),
+  isModalOpen: selectors.isModalOpen('criarSelecao'),
 });
 
 export default Form.create()(connect(mapStateToProps)(CriarPrograma));

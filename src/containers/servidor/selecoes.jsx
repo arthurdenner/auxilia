@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash/fp';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 // import EmptyContent from '~/components/empty-content';
-import SelecoesList from '~/components/selecoes-grid';
+import SelecoesGrid from '~/components/selecoes-grid';
 import CriarSelecao from './criar-selecao';
 import styles from './servidor.less';
 
@@ -17,7 +17,7 @@ const Selecoes = ({ programas, selecoes, showModal }) => (
     </Button>
     {isEmpty(selecoes) ?
       <p>Você não tem nenhuma seleção</p> :
-      <SelecoesList programas={programas} selecoes={selecoes} />}
+      <SelecoesGrid programas={programas} selecoes={selecoes} />}
     <CriarSelecao />
   </div>
 );

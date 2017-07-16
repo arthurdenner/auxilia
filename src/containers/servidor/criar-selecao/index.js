@@ -1,1 +1,1 @@
-export { default } from './criar-programa';
+export { default } from './criar-selecao';
