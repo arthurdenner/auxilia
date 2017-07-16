@@ -17,7 +17,14 @@ class CriarPrograma extends PureComponent {
     programas: PropTypes.array.isRequired,
   };
 
-  handleClose = () => this.props.dispatch(actions.hideModalCriarSelecao());
+  state = {
+    modalKey: new Date().toJSON(),
+  };
+
+  handleClose = () => {
+    this.props.dispatch(actions.hideModalCriarSelecao());
+    this.setState({ modalKey: new Date().toJSON() });
+  };
 
   handleSubmit = () => {
     const { dispatch, form: { validateFields } } = this.props;
@@ -43,9 +50,16 @@ class CriarPrograma extends PureComponent {
 
   render() {
     const { form: { getFieldDecorator }, isModalOpen, programas } = this.props;
+    const { modalKey } = this.state;
 
     return (
-      <Modal closable={false} footer={null} visible={isModalOpen} wrapClassName={styles.modal}>
+      <Modal
+        key={modalKey}
+        closable={false}
+        footer={null}
+        visible={isModalOpen}
+        wrapClassName={styles.modal}
+      >
         <FlexElement full column>
           <FlexElement align="center" justify="space-between" className={styles.header}>
             <h3 className={styles.headerTitle}>Criar Seleção</h3>
