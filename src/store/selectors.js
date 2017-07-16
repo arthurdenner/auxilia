@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash';
 
 // App
 export const getSelectedTab = () => getData('app.selectedTab');
+export const getTypeUser = () => getData('app.typeUser');
 
 // Auth
 export const getAuth = () => getData('auth.data');
