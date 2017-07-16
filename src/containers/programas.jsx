@@ -5,16 +5,16 @@ import * as selectors from '~/store/selectors';
 import ProgramasAluno from './aluno/programas';
 import ProgramasServidor from './servidor/programas';
 
-const Programas = ({ typeUser }) => (
-  typeUser === 'aluno' ? <ProgramasAluno /> : <ProgramasServidor />
+const Programas = ({ isServidor }) => (
+  isServidor ? <ProgramasServidor /> : <ProgramasAluno />
 );
 
 Programas.propTypes = {
-  typeUser: PropTypes.string.isRequired,
+  isServidor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = () => ({
-  typeUser: selectors.getTypeUser(),
+  isServidor: selectors.isTypeUser('servidor'),
 });
 
 export default connect(mapStateToProps)(Programas);

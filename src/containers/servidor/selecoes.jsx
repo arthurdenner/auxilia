@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
-import { isEmpty } from 'lodash/fp';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 // import EmptyContent from '~/components/empty-content';
@@ -15,9 +14,7 @@ const Selecoes = ({ programas, selecoes, showModal }) => (
     <Button type="primary" icon="plus" onClick={showModal} className={styles.button}>
       Criar uma seleção
     </Button>
-    {isEmpty(selecoes) ?
-      <p>Você não tem nenhuma seleção</p> :
-      <SelecoesGrid programas={programas} selecoes={selecoes} />}
+    <SelecoesGrid programas={programas} selecoes={selecoes} />
     <CriarSelecao />
   </div>
 );

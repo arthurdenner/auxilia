@@ -5,16 +5,16 @@ import * as selectors from '~/store/selectors';
 import SelecoesAluno from './aluno/selecoes';
 import SelecoesServidor from './servidor/selecoes';
 
-const Selecoes = ({ typeUser }) => (
-  typeUser === 'aluno' ? <SelecoesAluno /> : <SelecoesServidor />
+const Selecoes = ({ isServidor }) => (
+  isServidor ? <SelecoesServidor /> : <SelecoesAluno />
 );
 
 Selecoes.propTypes = {
-  typeUser: PropTypes.string.isRequired,
+  isServidor: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = () => ({
-  typeUser: selectors.getTypeUser(),
+  isServidor: selectors.isTypeUser('servidor'),
 });
 
 export default connect(mapStateToProps)(Selecoes);
