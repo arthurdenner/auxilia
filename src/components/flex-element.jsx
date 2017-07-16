@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import cn from 'classnames';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 import { omit } from 'lodash';
 import cnames from '~/helpers/cnames';
 import styles from './flex-element.less';
