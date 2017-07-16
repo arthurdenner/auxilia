@@ -7,6 +7,6 @@ export default combineReducers({
     isOpen: handleActions({
       [actions.showModalCriarPrograma]: () => true,
       [actions.hideModalCriarPrograma]: () => false,
-    }, true),
+    }, false),
   }),
 });

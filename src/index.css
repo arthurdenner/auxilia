@@ -6,6 +6,6 @@ body {
   font-family: sans-serif;
 }
 
-#root, .container {
+#root {
   height: 100%;
 }

@@ -13,7 +13,7 @@ import styles from './main.less';
 const { Content, Header } = Layout;
 
 const Main = ({ changeTab, selectedTab }) => (
-  <Layout className="container">
+  <Layout className={styles.container}>
     <Header className={styles.header}>
       <span>AUXILIA</span>
       <Menu

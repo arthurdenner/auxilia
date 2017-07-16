@@ -27,8 +27,8 @@ const middleware = composeWithDevTools(applyMiddleware(promise(), thunk));
 const store = createStore(reducers, loadState(), middleware);
 
 store.subscribe(throttle(() => {
-  const { app: { selectedTab }/* , auth: { data }*/ } = store.getState();
-  const state = { app: { selectedTab }/* , auth: { data }*/ };
+  const { app: { selectedTab }, programas /* , auth: { data }*/ } = store.getState();
+  const state = { app: { selectedTab }, programas /* , auth: { data }*/ };
 
   saveState(state, 1000);
 }));

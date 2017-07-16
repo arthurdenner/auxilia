@@ -37,7 +37,19 @@
 }
 
 .modal {
+  :global(.ant-modal) {
+    max-width: 50% !important;
+  }
+
   :global(.ant-modal-body) {
     padding: 0;
+  }
+}
+
+@media (max-width: 599px) {
+  .modal {
+    :global(.ant-modal) {
+      max-width: 80% !important;
+    }
   }
 }
