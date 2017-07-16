@@ -26,7 +26,12 @@ const middleware = composeWithDevTools(applyMiddleware(promise(), thunk));
 
 const store = createStore(reducers, loadState(), middleware);
 
-store.subscribe(throttle(() => saveState(store.getState())), 1000);
+store.subscribe(throttle(() => {
+  const { app: { selectedTab }, auth: { data } } = store.getState();
+  const state = { app: { selectedTab }, auth: { data } };
+
+  saveState(state, 1000);
+}));
 
 export const getData = (attr, notFound) => get(store.getState(), attr, notFound);
 

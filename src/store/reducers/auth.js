@@ -7,4 +7,5 @@ export default combineReducers({
     [actions.authorize]: (state, { payload }) => payload,
     [actions.unauthorize]: () => ({}),
   }, {}),
+  typeUser: handleActions({}, 'servidor'),
 });

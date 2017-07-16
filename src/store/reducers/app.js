@@ -6,5 +6,4 @@ export default combineReducers({
   selectedTab: handleActions({
       [actions.selectTab]: (state, { payload }) => payload,
     }, ['item_1']),
-  typeUser: handleActions({}, 'aluno'),
-}); 
+});
