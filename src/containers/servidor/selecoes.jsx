@@ -6,28 +6,30 @@ import { isEmpty } from 'lodash/fp';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 // import EmptyContent from '~/components/empty-content';
-import SelecoesList from '~/components/selecoes';
+import SelecoesList from '~/components/selecoes-grid';
 import CriarSelecao from './criar-selecao';
 import styles from './servidor.less';
 
-const Selecoes = ({ selecoes, showModal }) => (
+const Selecoes = ({ programas, selecoes, showModal }) => (
   <div className={styles.container}>
     <Button type="primary" icon="plus" onClick={showModal} className={styles.button}>
       Criar uma seleção
     </Button>
     {isEmpty(selecoes) ?
       <p>Você não tem nenhuma seleção</p> :
-      <SelecoesList selecoes={selecoes} />}
+      <SelecoesList programas={programas} selecoes={selecoes} />}
     <CriarSelecao />
   </div>
 );
 
 Selecoes.propTypes = {
+  programas: PropTypes.array.isRequired,
   selecoes: PropTypes.array.isRequired,
   showModal: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = () => ({
+  programas: selectors.getMeusProgramas(),
   selecoes: selectors.getMinhasSelecoes(),
 });
 

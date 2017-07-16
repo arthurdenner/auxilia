@@ -6,7 +6,7 @@ import styles from './programa.less';
 const Panel = Collapse.Panel;
 
 const Programa = ({ programa }) => (
-  <Collapse bordered={false} className={styles.programa}>
+  <Collapse className={styles.programa}>
     <Panel header={programa.nome}>
       <p>{programa.descricao}</p>
     </Panel>

@@ -1,9 +1,12 @@
 const selecoes = [
   {
     _id: '8446785583',
-    programa: '9940968936',
+    programa: {
+      _id: '34f65333-fb95-4470-8836-4f1b7914f33c',
+      nome: 'Programa #1',
+    },
     criador: '3220214677',
-    nome: 'Programa #1',
+    nome: 'Seleção #1',
     descricao: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis placerat sodales. Ut vitae semper nunc.
     Vestibulum velit nulla, ullamcorper a quam et, efficitur dignissim sem. Cras ac ante nunc.
     Fusce ultrices bibendum nisl, eu aliquam quam ultrices eget. Quisque hendrerit tellus vel tristique interdum.
@@ -11,12 +14,16 @@ const selecoes = [
     Ut bibendum lacus id porttitor tempor. Suspendisse ac tellus quis augue efficitur aliquet.
     Nam id leo condimentum eros euismod iaculis interdum vel augue. Morbi pulvinar tempus aliquam.
     Donec sed fringilla ante, vel tristique sem. Pellentesque purus elit, varius quis.`,
+    vagas: 10,
   },
   {
     _id: '5651683619',
-    programa: '9940968936',
+    programa: {
+      _id: '34f65333-fb95-4470-8836-4f1b7914f33c',
+      nome: 'Programa #1',
+    },
     criador: '3220214677',
-    nome: 'Programa #2',
+    nome: 'Seleção #2',
     descricao: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis placerat sodales. Ut vitae semper nunc.
     Vestibulum velit nulla, ullamcorper a quam et, efficitur dignissim sem. Cras ac ante nunc.
     Fusce ultrices bibendum nisl, eu aliquam quam ultrices eget. Quisque hendrerit tellus vel tristique interdum.
@@ -24,6 +31,7 @@ const selecoes = [
     Ut bibendum lacus id porttitor tempor. Suspendisse ac tellus quis augue efficitur aliquet.
     Nam id leo condimentum eros euismod iaculis interdum vel augue. Morbi pulvinar tempus aliquam.
     Donec sed fringilla ante, vel tristique sem. Pellentesque purus elit, varius quis.`,
+    vagas: 10,
   },
 ];
 

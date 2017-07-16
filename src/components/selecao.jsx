@@ -5,16 +5,16 @@ import styles from './selecao.less';
 
 const Panel = Collapse.Panel;
 
-const Programa = ({ selecao }) => (
-  <Collapse bordered={false} className={styles.selecao}>
+const Selecao = ({ selecao }) => (
+  <Collapse className={styles.selecao}>
     <Panel header={selecao.nome}>
       <p>{selecao.descricao}</p>
     </Panel>
   </Collapse>
 );
 
-Programa.propTypes = {
+Selecao.propTypes = {
   selecao: PropTypes.object.isRequired,
 };
 
-export default Programa;
+export default Selecao;
