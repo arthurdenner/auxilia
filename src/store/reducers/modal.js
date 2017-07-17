@@ -4,6 +4,10 @@ import actions from '~/store/actions';
 
 export default combineReducers({
   criarPrograma: combineReducers({
+    idPrograma: handleActions({
+      [actions.selectPrograma]: (state, { payload }) => payload,
+      [actions.hideModalCriarPrograma]: () => '',
+    }, ''),
     isOpen: handleActions({
       [actions.showModalCriarPrograma]: () => true,
       [actions.hideModalCriarPrograma]: () => false,

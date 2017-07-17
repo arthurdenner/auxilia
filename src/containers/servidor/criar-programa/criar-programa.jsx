@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { isEmpty } from 'lodash/fp';
 import { Button, Form, Icon, Input, notification } from 'antd';
 import FlexElement from '~/components/flex-element';
 import Modal from '~/components/modal';
@@ -14,6 +15,11 @@ class CriarPrograma extends PureComponent {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
+    programa: PropTypes.object,
+  };
+
+  static defaultProps = {
+    programa: {},
   };
 
   state = {
@@ -26,24 +32,28 @@ class CriarPrograma extends PureComponent {
   };
 
   handleSubmit = () => {
-    const { dispatch, form } = this.props;
+    const { dispatch, form, programa } = this.props;
     const notify = () => notification.success({
       message: 'Sucesso!',
-      description: 'O programa foi criado com sucesso!',
+      description: `O programa foi ${isEmpty(programa) ? 'criado' : 'atualizado'} com sucesso!`,
       placement: 'bottomRight',
     });
 
     form.validateFields((err, values) => {
       if (!err) {
-        dispatch(actions.addPrograma(values));
-        dispatch(actions.hideModalCriarPrograma());
+        if (isEmpty(programa)) {
+          dispatch(actions.addPrograma(values));
+        } else {
+          dispatch(actions.updatePrograma({ ...programa, ...values }));
+        }
+        this.handleClose();
         notify();
       }
     });
   }
 
   render() {
-    const { form, isModalOpen } = this.props;
+    const { form, isModalOpen, programa } = this.props;
     const { modalKey } = this.state;
 
     return (
@@ -56,18 +66,26 @@ class CriarPrograma extends PureComponent {
       >
         <FlexElement full column>
           <FlexElement align="center" justify="space-between" className={styles.header}>
-            <h3 className={styles.headerTitle}>Criar Programa</h3>
+            <h3 className={styles.headerTitle}>
+              {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
+            </h3>
             <Icon type="close" onClick={this.handleClose} className={styles.icon} />
           </FlexElement>
           <FlexElement full style={{ padding: '0.2em 1em' }}>
             <Form style={{ width: '100%' }}>
               <Form.Item hasFeedback label="Nome do programa">
-                {form.getFieldDecorator('nome', nomeRules)(
+                {form.getFieldDecorator('nome', {
+                  ...nomeRules,
+                  initialValue: programa.nome,
+                })(
                   <Input placeholder="Nome do programa" />,
                 )}
               </Form.Item>
               <Form.Item hasFeedback label="Descrição do programa">
-                {form.getFieldDecorator('descricao', descricaoRules)(
+                {form.getFieldDecorator('descricao', {
+                  ...descricaoRules,
+                  initialValue: programa.descricao,
+                })(
                   <Input.TextArea rows={5} placeholder="Descrição do programa" />,
                 )}
               </Form.Item>
@@ -78,7 +96,7 @@ class CriarPrograma extends PureComponent {
               Cancelar
             </Button>
             <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
-              Criar Programa
+              {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
             </Button>
           </FlexElement>
         </FlexElement>
@@ -89,6 +107,8 @@ class CriarPrograma extends PureComponent {
 
 const mapStateToProps = () => ({
   isModalOpen: selectors.isModalOpen('criarPrograma'),
+  programa: selectors.getSelectedPrograma('criarPrograma'),
 });
+
 
 export default Form.create()(connect(mapStateToProps)(CriarPrograma));
