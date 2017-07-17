@@ -17,7 +17,7 @@ const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
       {isServidor && (
         <FlexElement column>
           <Divider horizontal style={{ margin: '1em 0em' }} />
-          <FlexElement className={styles.botoes}>
+          <FlexElement className={styles.buttons}>
             <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa._id)}>
               Editar
             </Button>

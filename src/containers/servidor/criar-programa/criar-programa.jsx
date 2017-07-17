@@ -107,7 +107,7 @@ class CriarPrograma extends PureComponent {
 
 const mapStateToProps = () => ({
   isModalOpen: selectors.isModalOpen('criarPrograma'),
-  programa: selectors.getSelectedPrograma('criarPrograma'),
+  programa: selectors.getSelectedPrograma(),
 });
 
 

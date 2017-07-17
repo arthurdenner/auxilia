@@ -11,19 +11,23 @@ export const isTypeUser = tipo => getUser().tipo === tipo;
 export const isLogged = () => !isEmpty(getData('auth.data'));
 export const isLogging = () => getData('auth.isLogging');
 
+// Geral
+export const isUserCriador = item => (
+  get('criador', item) === getUser()._id ||
+  get('criador._id', item) === getUser()._id
+);
+
 // Programas
-export const isUserCriador = programa => get('criador._id', programa) === getUser()._id;
 export const getProgramas = () => getData('programas');
 export const getMeusProgramas = () => filter(isUserCriador, getProgramas());
 export const getPrograma = _id => find({ _id }, getProgramas());
 
 // Seleções
-export const geSelecoes = () => getData('selecoes');
-export const getMinhasSelecoes = () => getData('selecoes');
+export const getSelecoes = () => getData('selecoes');
+export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes());
+export const getSelecao = _id => find({ _id }, getSelecoes());
 
 // Modal
 export const isModalOpen = context => getData(`modal.${context}.isOpen`);
-export const getSelectedPrograma = (context) => {
-  const _id = getData(`modal.${context}.idPrograma`);
-  return getPrograma(_id);
-};
+export const getSelectedPrograma = () => getPrograma(getData('modal.criarPrograma.idPrograma'));
+export const getSelectedSelecao = () => getSelecao(getData('modal.criarSelecao.idSelecao'));

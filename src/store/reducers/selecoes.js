@@ -22,6 +22,13 @@ export default handleActions({
     },
   ],
   [actions.updateSelecao]: (state, { payload }) => state.map(selecao =>
-    selecao._id === payload._id ? { ...selecao, ...payload } : selecao),
+    selecao._id === payload._id ? {
+      ...selecao,
+      ...payload,
+      programa: {
+        _id: payload.programa,
+        nome: getPrograma(payload.programa).nome,
+      },
+    } : selecao),
   [actions.deleteSelecao]: (state, { payload }) => filter(({ _id }) => _id !== payload, state),
 }, []);
