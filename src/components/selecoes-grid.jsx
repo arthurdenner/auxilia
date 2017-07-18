@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { filter, get } from 'lodash/fp';
-import { Collapse } from 'antd';
 import FlexElement from '~/components/flex-element';
 import Selecoes from '~/components/selecoes';
-import styles from './selecoes-grid.less';
-
-const Panel = Collapse.Panel;
 
 const getSelecoes = (programa, selecoes) => {
   const getId = selecao => (get('programa._id', selecao) === programa);
@@ -17,11 +13,18 @@ const getSelecoes = (programa, selecoes) => {
 const SelecoesGrid = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
-      <Collapse key={programa._id} className={styles.programa}>
-        <Panel header={`Seleções para o programa ${programa.nome}`}>
-          <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
-        </Panel>
-      </Collapse>,
+      <div className="ant-collapse">
+        <div className="ant-collapse-item">
+          <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
+            <p>{`Seleções para o programa ${programa.nome}`}</p>
+          </div>
+          <div className="ant-collapse-content">
+            <div className="ant-collapse-content-box">
+              <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
+            </div>
+          </div>
+        </div>
+      </div>,
     )}
   </FlexElement>
 );

@@ -1,34 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Collapse, notification } from 'antd';
+import { Button, notification } from 'antd';
 import Divider from '~/components/divider';
 import FlexElement from '~/components/flex-element';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import styles from './programa.less';
 
-const Panel = Collapse.Panel;
-
 const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
-  <Collapse className={styles.programa}>
-    <Panel header={programa.nome}>
-      <p>{programa.descricao}</p>
-      {isServidor && (
-        <FlexElement column>
-          <Divider horizontal style={{ margin: '1em 0em' }} />
-          <FlexElement className={styles.buttons}>
-            <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa._id)}>
-              Editar
-            </Button>
-            <Button icon="delete" className={styles.button} onClick={() => deletePrograma(programa._id)}>
-              Deletar
-            </Button>
-          </FlexElement>
-        </FlexElement>
-      )}
-    </Panel>
-  </Collapse>
+  <div className="ant-collapse">
+    <div className="ant-collapse-item">
+      <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
+        <p>{programa.nome}</p>
+      </div>
+      <div className="ant-collapse-content">
+        <div className="ant-collapse-content-box">
+          <p>{programa.descricao}</p>
+          {isServidor && (
+            <FlexElement column>
+              <Divider horizontal style={{ margin: '1em 0em' }} />
+              <FlexElement className={styles.buttons}>
+                <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa._id)}>
+                  Editar
+                </Button>
+                <Button icon="delete" className={styles.button} onClick={() => deletePrograma(programa._id)}>
+                  Deletar
+                </Button>
+              </FlexElement>
+            </FlexElement>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 Programa.propTypes = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Collapse, notification } from 'antd';
+import { Button, notification } from 'antd';
 import formatDate from '~/helpers/format-date';
 import Divider from '~/components/divider';
 import FlexElement from '~/components/flex-element';
@@ -9,30 +9,35 @@ import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import styles from './selecao.less';
 
-const Panel = Collapse.Panel;
-
 const Selecao = ({ deleteSelecao, editSelecao, isServidor, selecao }) => (
-  <Collapse className={styles.selecao}>
-    <Panel header={selecao.nome}>
-      <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
-      <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
-      <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>
-      <p><strong>Descrição: </strong>{selecao.descricao}</p>
-      {isServidor && (
-        <FlexElement column>
-          <Divider horizontal style={{ margin: '1em 0em' }} />
-          <FlexElement className={styles.buttons}>
-            <Button icon="edit" className={styles.button} onClick={() => editSelecao(selecao._id)}>
-              Editar
-            </Button>
-            <Button icon="delete" className={styles.button} onClick={() => deleteSelecao(selecao._id)}>
-              Deletar
-            </Button>
-          </FlexElement>
-        </FlexElement>
-      )}
-    </Panel>
-  </Collapse>
+  <div className="ant-collapse">
+    <div className="ant-collapse-item">
+      <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
+        <p>{selecao.nome}</p>
+      </div>
+      <div className="ant-collapse-content">
+        <div className="ant-collapse-content-box">
+          <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
+          <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
+          <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>
+          <p><strong>Descrição: </strong>{selecao.descricao}</p>
+          {isServidor && (
+            <FlexElement column>
+              <Divider horizontal style={{ margin: '1em 0em' }} />
+              <FlexElement className={styles.buttons}>
+                <Button icon="edit" className={styles.button} onClick={() => editSelecao(selecao._id)}>
+                  Editar
+                </Button>
+                <Button icon="delete" className={styles.button} onClick={() => deleteSelecao(selecao._id)}>
+                  Deletar
+                </Button>
+              </FlexElement>
+            </FlexElement>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 Selecao.propTypes = {
