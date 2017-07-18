@@ -9,7 +9,7 @@ import * as selectors from '~/store/selectors';
 import styles from './programa.less';
 
 const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
-  <div className="ant-collapse">
+  <div className="ant-collapse" style={{ marginTop: '1em' }}>
     <div className="ant-collapse-item">
       <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
         <p>{programa.nome}</p>
