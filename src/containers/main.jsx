@@ -15,7 +15,9 @@ const { Content, Header } = Layout;
 const Main = ({ changeTab, selectedTab }) => (
   <Layout className={styles.container}>
     <Header className={styles.header}>
-      <span>AUXILIA</span>
+      <a className={styles.image} href="/">
+        <img src="http://i.imgur.com/zoYZVLz.png" alt="AUXILIA" />
+      </a>
       <Menu
         className={styles.menu}
         theme="dark" mode="horizontal"
