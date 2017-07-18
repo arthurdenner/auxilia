@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { isEmpty } from 'lodash/fp';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
-// import EmptyContent from '~/components/empty-content';
+import EmptyContent from '~/components/empty-content';
 import SelecoesGrid from '~/components/selecoes-grid';
 import CriarSelecao from './criar-selecao';
 import styles from './servidor.less';
@@ -16,7 +16,7 @@ const Selecoes = ({ programas, selecoes, showModal }) => (
       Criar uma seleção
     </Button>
     {isEmpty(programas) ?
-      <p>Você não tem nenhum programa, logo, nenhuma seleção</p> :
+      <EmptyContent title="Você não tem nenhum programa, logo, nenhuma seleção" icon="calendar" /> :
       <SelecoesGrid programas={programas} selecoes={selecoes} />}
     <CriarSelecao />
   </div>

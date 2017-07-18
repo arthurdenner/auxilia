@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import { isEmpty } from 'lodash/fp';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
-// import EmptyContent from '~/components/empty-content';
+import EmptyContent from '~/components/empty-content';
 import ProgramasList from '~/components/programas';
 import CriarPrograma from './criar-programa';
 import styles from './servidor.less';
@@ -16,7 +16,7 @@ const Programas = ({ programas, showModal }) => (
       Criar um programa
     </Button>
     {isEmpty(programas) ?
-      <p>Você não tem nenhum programa</p> :
+      <EmptyContent title="Você não tem nenhum programa" icon="appstore-o" /> :
       <ProgramasList programas={programas} />}
     <CriarPrograma />
   </div>

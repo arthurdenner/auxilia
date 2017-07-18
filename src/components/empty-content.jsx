@@ -6,9 +6,9 @@ import FlexElement from './flex-element';
 const styles = {
   container: {
     alignContent: 'center',
-    height: '100%',
-    width: '100%',
-    position: 'absolute',
+    // height: '100%',
+    // width: '100%',
+    // position: 'absolute',
   },
   icon: {
     fontSize: '3em',
@@ -18,7 +18,7 @@ const styles = {
 
 const EmptyContent = ({ children, title, subtitle, icon }) => (
   <FlexElement full column align="center" justify="center" style={styles.container}>
-    <FlexElement column align="center" justify="center" as="h3">
+    <FlexElement column align="center" justify="center" as="h2">
       {icon && <Icon type={icon} style={styles.icon} />}
       {title && <div>{title}</div>}
       {subtitle && <div>{subtitle}</div>}
