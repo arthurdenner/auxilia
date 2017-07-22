@@ -8,8 +8,7 @@ export const getSelectedTab = () => getData('app.selectedTab');
 export const getAuth = () => getData('auth.data');
 export const getUser = () => getData('auth.data.usuario', {});
 export const isTypeUser = tipo => getUser().tipo === tipo;
-// export const isLogged = () => !isEmpty(getData('auth.data'));
-export const isLogged = () => false;
+export const isLogged = () => !isEmpty(getData('auth.data'));
 export const isLogging = () => getData('auth.isLogging');
 
 // Geral

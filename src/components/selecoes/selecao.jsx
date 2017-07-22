@@ -18,6 +18,7 @@ const Selecao = ({
   enterSelecao,
   isAluno,
   isAlunoInSelecao,
+  isLogged,
   isServidor,
   leaveSelecao,
   selecao,
@@ -46,6 +47,9 @@ const Selecao = ({
           isAlunoInSelecao={isAlunoInSelecao}
         />
       )}
+      {!isLogged && (
+        <p>Você precisa estar logado para participar de uma seleção.</p>
+      )}
     </FlexElement>
   </CollapseOpen>
 );
@@ -56,6 +60,7 @@ Selecao.propTypes = {
   enterSelecao: PropTypes.func.isRequired,
   isAluno: PropTypes.bool.isRequired,
   isAlunoInSelecao: PropTypes.bool.isRequired,
+  isLogged: PropTypes.bool.isRequired,
   isServidor: PropTypes.bool.isRequired,
   leaveSelecao: PropTypes.func.isRequired,
   selecao: PropTypes.object.isRequired,
@@ -63,6 +68,7 @@ Selecao.propTypes = {
 
 const mapStateToProps = (state, { selecao }) => ({
   isAluno: selectors.isTypeUser('aluno'),
+  isLogged: selectors.isLogged(),
   isServidor: selectors.isTypeUser('servidor'),
   isAlunoInSelecao: selectors.isInSelecao(selecao),
 });
