@@ -32,14 +32,14 @@ class CriarPrograma extends PureComponent {
   };
 
   handleSubmit = () => {
-    const { dispatch, form, programa } = this.props;
+    const { dispatch, form: { validateFields }, programa } = this.props;
     const notify = () => notification.success({
       message: 'Sucesso!',
       description: `O programa foi ${isEmpty(programa) ? 'criado' : 'atualizado'} com sucesso!`,
       placement: 'bottomRight',
     });
 
-    form.validateFields((err, values) => {
+    validateFields((err, values) => {
       if (!err) {
         if (isEmpty(programa)) {
           dispatch(actions.addPrograma(values));

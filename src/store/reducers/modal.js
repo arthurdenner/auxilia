@@ -23,4 +23,10 @@ export default combineReducers({
       [actions.hideModalCriarSelecao]: () => false,
     }, false),
   }),
+  login: combineReducers({
+    isOpen: handleActions({
+      [actions.showModalLogin]: () => true,
+      [actions.hideModalLogin]: () => false,
+    }, false),
+  }),
 });
