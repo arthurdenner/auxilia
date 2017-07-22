@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { filter, get } from 'lodash/fp';
 import FlexElement from '~/components/flex-element';
-import Selecoes from '~/components/selecoes';
+import Selecoes from '~/components/selecoes/selecoes';
 
 const getSelecoes = (programa, selecoes) => {
   const getId = selecao => (get('programa._id', selecao) === programa);

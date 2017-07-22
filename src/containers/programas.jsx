@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Input } from 'antd';
 import { isEmpty } from 'lodash/fp';
+import CriarPrograma from '~/containers/servidor/criar-programa';
 import EmptyContent from '~/components/empty-content';
 import FlexElement from '~/components/flex-element';
 import ProgramasList from '~/components/programas/programas-list';
 import filterByName from '~/helpers/filter-by-name';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
-import CriarPrograma from './servidor/criar-programa';
 import styles from './main.less';
 
 class Programas extends PureComponent {

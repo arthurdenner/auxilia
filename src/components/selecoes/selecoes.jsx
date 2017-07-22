@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { isEmpty } from 'lodash/fp';
 import FlexElement from '~/components/flex-element';
-import Selecao from '~/components/selecao';
+import Selecao from '~/components/selecoes/selecao';
 
 const Selecoes = ({ selecoes }) => (
   <FlexElement full column>
