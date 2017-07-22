@@ -78,8 +78,22 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.selectSelecao(_id));
     dispatch(actions.showModalCriarSelecao());
   },
-  enterSelecao: _id => console.log('entrar na selecao', _id),
-  leaveSelecao: _id => console.log('sair da selecao', _id),
+  enterSelecao: (_id) => {
+    dispatch(actions.enterSelecao(_id));
+    notification.success({
+      message: 'Sucesso!',
+      description: 'Você entrou na seleção!',
+      placement: 'bottomRight',
+    });
+  },
+  leaveSelecao: (_id) => {
+    dispatch(actions.leaveSelecao(_id));
+    notification.success({
+      message: 'Sucesso!',
+      description: 'Você saiu da seleção!',
+      placement: 'bottomRight',
+    });
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Selecao);

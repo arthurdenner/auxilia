@@ -1,9 +1,10 @@
 import { handleActions } from 'redux-actions';
 import v4 from 'uuid/v4';
 import { filter } from 'lodash/fp';
+import { without } from 'lodash';
 import actions from '~/store/actions';
 import { getPrograma, getUser } from '~/store/selectors';
-import selecoes from '~/_static/selecoes';
+// import selecoes from '~/_static/selecoes';
 
 export default handleActions({
   [actions.addSelecao]: (state, { payload }) => [
@@ -19,6 +20,7 @@ export default handleActions({
         _id: payload.programa,
         nome: getPrograma(payload.programa).nome,
       },
+      participantes: [],
     },
   ],
   [actions.updateSelecao]: (state, { payload }) => state.map(selecao =>
@@ -31,4 +33,17 @@ export default handleActions({
       },
     } : selecao),
   [actions.deleteSelecao]: (state, { payload }) => filter(({ _id }) => _id !== payload, state),
-}, selecoes);
+  [actions.enterSelecao]: (state, { payload }) => state.map(selecao =>
+    selecao._id === payload ? {
+      ...selecao,
+      participantes: [
+        ...selecao.participantes,
+        getUser()._id,
+      ],
+    } : selecao),
+  [actions.leaveSelecao]: (state, { payload }) => state.map(selecao =>
+    selecao._id === payload ? {
+      ...selecao,
+      participantes: without(selecao.participantes, getUser()._id),
+    } : selecao),
+}, []);
