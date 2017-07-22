@@ -10,7 +10,7 @@ import * as selectors from '~/store/selectors';
 import FormSelecao from './form';
 import styles from './criar-selecao.less';
 
-class CriarPrograma extends PureComponent {
+class CriarSelecao extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
@@ -109,4 +109,4 @@ const mapStateToProps = () => ({
   selecao: selectors.getSelectedSelecao(),
 });
 
-export default Form.create()(connect(mapStateToProps)(CriarPrograma));
+export default Form.create()(connect(mapStateToProps)(CriarSelecao));

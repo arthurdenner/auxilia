@@ -7,6 +7,8 @@ import FlexElement from '~/components/flex-element';
 import { dataRules, descricaoRules, nomeRules, programaRules, vagasRules } from './rules';
 import styles from './criar-selecao.less';
 
+const disabledDate = current => current && current.valueOf() < Date.now();
+
 const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
   <Form style={{ width: '100%' }}>
     <Form.Item hasFeedback label="Programa">
@@ -43,19 +45,27 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
       <Form.Item hasFeedback label="Data de início">
         {getFieldDecorator('dataInicio', {
           ...dataRules,
-          initialValue: moment(selecao.dataInicio, 'YYYY/MM/DD HH:mm:ss').isValid() ?
-          moment(selecao.dataInicio, 'YYYY/MM/DD HH:mm:ss') : moment(),
+          initialValue: selecao.dataInicio && moment(selecao.dataInicio, 'YYYY/MM/DD HH:mm:ss'),
         })(
-          <DatePicker format="DD/MM/YYYY" placeholder="Data de início" />,
+          <DatePicker
+            format="DD/MM/YYYY HH:mm:ss"
+            placeholder="Data de início"
+            disabledDate={disabledDate}
+            showTime={{ defaultValue: moment('00:00:01', 'HH:mm:ss') }}
+          />,
         )}
       </Form.Item>
       <Form.Item hasFeedback label="Data final">
         {getFieldDecorator('dataFinal', {
           ...dataRules,
-          initialValue: moment(selecao.dataFinal, 'YYYY/MM/DD HH:mm:ss').isValid() ?
-          moment(selecao.dataFinal, 'YYYY/MM/DD HH:mm:ss') : moment(),
+          initialValue: selecao.dataFinal && moment(selecao.dataFinal, 'YYYY/MM/DD HH:mm:ss'),
         })(
-          <DatePicker format="DD/MM/YYYY" placeholder="Data final" />,
+          <DatePicker
+            format="DD/MM/YYYY HH:mm:ss"
+            placeholder="Data final"
+            disabledDate={disabledDate}
+            showTime={{ defaultValue: moment('23:59:59', 'HH:mm:ss') }}
+          />,
         )}
       </Form.Item>
       <Form.Item hasFeedback label="Número de vagas">
