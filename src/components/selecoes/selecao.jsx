@@ -23,6 +23,7 @@ const Selecao = ({
   selecao,
 }) => (
   <CollapseOpen title={selecao.nome} wrapClass={styles.selecao}>
+    <p><strong>Autor: </strong>{selecao.criador.nome}</p>
     <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
     <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
     <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>
