@@ -11,7 +11,8 @@ import styles from './programa.less';
 
 const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
   <CollapseOpen title={programa.nome} wrapClass={styles.collapse}>
-    <p>{programa.descricao}</p>
+    <p><strong>Autor: </strong>{programa.criador.nome}</p>
+    <p><strong>Descrição: </strong>{programa.descricao}</p>
     {isServidor && (
       <FlexElement column>
         <Divider horizontal style={{ margin: '1em 0em' }} />

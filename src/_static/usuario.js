@@ -1,7 +1,7 @@
 const usuario = {
-  _id: '3220214677',
+  _id: '3220214679',
   nome: 'Usuário logado',
-  tipo: 'servidor',
+  tipo: 'aluno',
 };
 
 export default usuario;

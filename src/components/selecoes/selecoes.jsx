@@ -7,7 +7,7 @@ import Selecao from '~/components/selecoes/selecao';
 const Selecoes = ({ selecoes }) => (
   <FlexElement full column>
     {isEmpty(selecoes) ?
-      <span>Este programa não tem nenhuma seleção.</span> :
+      <span>Nenhuma seleção encontrada para este programa.</span> :
       selecoes.map(selecao => (
         <Selecao key={selecao._id} selecao={selecao} />
       ))}

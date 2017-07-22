@@ -3,7 +3,7 @@ import v4 from 'uuid/v4';
 import { filter } from 'lodash/fp';
 import actions from '~/store/actions';
 import { getPrograma, getUser } from '~/store/selectors';
-// import selecoes from '~/_static/selecoes';
+import selecoes from '~/_static/selecoes';
 
 export default handleActions({
   [actions.addSelecao]: (state, { payload }) => [
@@ -31,4 +31,4 @@ export default handleActions({
       },
     } : selecao),
   [actions.deleteSelecao]: (state, { payload }) => filter(({ _id }) => _id !== payload, state),
-}, []);
+}, selecoes);
