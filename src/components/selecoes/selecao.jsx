@@ -11,7 +11,7 @@ import * as selectors from '~/store/selectors';
 import styles from './selecao.less';
 
 const Selecao = ({ deleteSelecao, editSelecao, isServidor, selecao }) => (
-  <CollapseOpen title={selecao.nome}>
+  <CollapseOpen title={selecao.nome} className={styles.collapse}>
     <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
     <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
     <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { filter, get } from 'lodash/fp';
+import CollapseOpen from '~/components/collapse-open';
 import FlexElement from '~/components/flex-element';
 import Selecoes from '~/components/selecoes/selecoes';
 
@@ -13,18 +14,13 @@ const getSelecoes = (programa, selecoes) => {
 const SelecoesGrid = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
-      <div className="ant-collapse" style={{ marginTop: '1em' }} key={programa._id}>
-        <div className="ant-collapse-item">
-          <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
-            <p>{`Seleções para o programa ${programa.nome}`}</p>
-          </div>
-          <div className="ant-collapse-content">
-            <div className="ant-collapse-content-box">
-              <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
-            </div>
-          </div>
-        </div>
-      </div>,
+      <CollapseOpen
+        key={programa._id}
+        style={{ marginTop: '1em' }}
+        title={`Seleções para o programa ${programa.nome}`}
+      >
+        <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
+      </CollapseOpen>,
     )}
   </FlexElement>
 );
