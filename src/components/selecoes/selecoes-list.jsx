@@ -4,6 +4,7 @@ import { filter, get } from 'lodash/fp';
 import CollapseOpen from '~/components/collapse-open';
 import FlexElement from '~/components/flex-element';
 import Selecoes from '~/components/selecoes/selecoes';
+import styles from './selecao.less';
 
 const getSelecoes = (programa, selecoes) => {
   const getId = selecao => (get('programa._id', selecao) === programa);
@@ -16,8 +17,8 @@ const SelecoesGrid = ({ programas, selecoes }) => (
     {programas.map(programa =>
       <CollapseOpen
         key={programa._id}
-        style={{ marginTop: '1em' }}
-        title={`Seleções para o programa ${programa.nome}`}
+        wrapClass={styles.collapse}
+        title={`Programa ${programa.nome}`}
       >
         <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
       </CollapseOpen>,

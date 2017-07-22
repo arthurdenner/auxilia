@@ -10,7 +10,7 @@ import * as selectors from '~/store/selectors';
 import styles from './programa.less';
 
 const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
-  <CollapseOpen title={programa.nome} style={{ marginTop: '1em' }}>
+  <CollapseOpen title={programa.nome} wrapClass={styles.collapse}>
     <p>{programa.descricao}</p>
     {isServidor && (
       <FlexElement column>

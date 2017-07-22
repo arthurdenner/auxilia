@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
-const CollapseOpen = ({ children, style, title }) => (
-  <div className="ant-collapse" style={style}>
+const CollapseOpen = ({ children, title, wrapClass }) => (
+  <div className={cn('ant-collapse', wrapClass)}>
     <div className="ant-collapse-item">
       <div className="ant-collapse-header" style={{ paddingLeft: '10px' }}>
         <p>{title}</p>
@@ -18,12 +19,12 @@ const CollapseOpen = ({ children, style, title }) => (
 
 CollapseOpen.propTypes = {
   children: PropTypes.node.isRequired,
-  style: PropTypes.object,
   title: PropTypes.string.isRequired,
+  wrapClass: PropTypes.string,
 };
 
 CollapseOpen.defaultProps = {
-  style: {},
+  wrapClass: '',
 };
 
 export default CollapseOpen;
