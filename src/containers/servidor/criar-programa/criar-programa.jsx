@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash/fp';
-import { Button, Form, Icon, Input, notification } from 'antd';
-import FlexElement from '~/components/flex-element';
+import { Button, Form, notification } from 'antd';
+import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
-import { nomeRules, descricaoRules } from './rules';
+import FormPrograma from './form';
 import styles from './criar-programa.less';
 
 class CriarPrograma extends PureComponent {
@@ -53,8 +53,29 @@ class CriarPrograma extends PureComponent {
   }
 
   render() {
-    const { form, isModalOpen, programa } = this.props;
+    const { form: { getFieldDecorator }, isModalOpen, programa } = this.props;
     const { modalKey } = this.state;
+
+    const config = {
+      title: isEmpty(programa) ? 'Criar programa' : 'Editar programa',
+      handleClose: this.handleClose,
+      content: (
+        <FormPrograma
+          getFieldDecorator={getFieldDecorator}
+          programa={programa}
+        />
+      ),
+      footer: (
+        <div>
+          <Button onClick={this.handleClose}>
+            Cancelar
+          </Button>
+          <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
+            {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
+          </Button>
+        </div>
+      ),
+    };
 
     return (
       <Modal
@@ -64,42 +85,7 @@ class CriarPrograma extends PureComponent {
         visible={isModalOpen}
         wrapClassName={styles.modal}
       >
-        <FlexElement full column>
-          <FlexElement align="center" justify="space-between" className={styles.header}>
-            <h3 className={styles.headerTitle}>
-              {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
-            </h3>
-            <Icon type="close" onClick={this.handleClose} className={styles.icon} />
-          </FlexElement>
-          <FlexElement full style={{ padding: '0.2em 1em' }}>
-            <Form style={{ width: '100%' }}>
-              <Form.Item hasFeedback label="Nome do programa">
-                {form.getFieldDecorator('nome', {
-                  ...nomeRules,
-                  initialValue: programa.nome,
-                })(
-                  <Input placeholder="Nome do programa" />,
-                )}
-              </Form.Item>
-              <Form.Item hasFeedback label="Descrição do programa">
-                {form.getFieldDecorator('descricao', {
-                  ...descricaoRules,
-                  initialValue: programa.descricao,
-                })(
-                  <Input.TextArea rows={5} placeholder="Descrição do programa" />,
-                )}
-              </Form.Item>
-            </Form>
-          </FlexElement>
-          <FlexElement justify="flex-end" className={styles.footer}>
-            <Button onClick={this.handleClose}>
-              Cancelar
-            </Button>
-            <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
-              {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
-            </Button>
-          </FlexElement>
-        </FlexElement>
+        <ConteudoModal config={config} />
       </Modal>
     );
   }
