@@ -8,7 +8,7 @@ import * as selectors from '~/store/selectors';
 import filterByName from '~/helpers/filter-by-name';
 import EmptyContent from '~/components/empty-content';
 import FlexElement from '~/components/flex-element';
-import ProgramasList from '~/components/programas';
+import ProgramasList from '~/components/programas-list';
 import CriarPrograma from './criar-programa';
 import styles from './servidor.less';
 

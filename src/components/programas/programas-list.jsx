@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FlexElement from '~/components/flex-element';
-import Programa from '~/components/programa';
+import Programa from '~/components/programas/programa';
 
-const Programas = ({ programas }) => (
+const ProgramasList = ({ programas }) => (
   <FlexElement full column>
     {programas.map(programa => (
       <Programa key={programa._id} programa={programa} />
@@ -11,8 +11,8 @@ const Programas = ({ programas }) => (
   </FlexElement>
 );
 
-Programas.propTypes = {
+ProgramasList.propTypes = {
   programas: PropTypes.array.isRequired,
 };
 
-export default Programas;
+export default ProgramasList;

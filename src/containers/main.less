@@ -1,5 +1,6 @@
 .container {
   height: 100%;
+  padding: 1em;
 }
 
 .header {
@@ -20,5 +21,24 @@
 
   & img {
     height: 1.5em;
+  }
+}
+
+.topbar {
+  flex-direction: row-reverse !important;
+}
+
+:global(.ant-input-affix-wrapper) {
+  width: 150px !important;
+}
+
+
+@media (max-width: 599px) {
+  :global(.ant-input-affix-wrapper) {
+    width: 48% !important;
+  }
+
+  .button {
+    width: 48% !important;
   }
 }

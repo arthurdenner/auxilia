@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Icon, Layout, Menu } from 'antd';
-import { NavLink, Route } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
+import NotFound from '~/components/not-found';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import { menuOptions } from '~/constants';
@@ -36,8 +37,11 @@ const Main = ({ changeTab, selectedTab }) => (
       </Menu>
     </Header>
     <Content>
-      <Route exact path="/" component={Programas} />
-      <Route path="/selecoes" component={Selecoes} />
+      <Switch>
+        <Route exact path="/" component={Programas} />
+        <Route path="/selecoes" component={Selecoes} />
+        <Route path="*" component={NotFound} />
+      </Switch>
     </Content>
   </Layout>
 );
