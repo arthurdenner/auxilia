@@ -15,11 +15,11 @@ Devido a isso, muitos alunos já enfrentaram situações confusas ou até mesmo 
 
 Também derivado desta maneira arcaica, como os dados dos alunos são armazenados, temos os problemas referentes aos programas estudantis ofertados aos alunos. Não há uma maneira eficiente de gerenciar as entrevistas, causando uma fila imensa para agendamento, e uma fila imensa também para o momento da entrevista. Entrevista essa que raramente demora mais que 10 minutos, enquanto o tempo de espera pode chegar de 1h até 2hs ou mais.
 
-## Tecnologias e ferramentas usadas
+<!-- ## Tecnologias e ferramentas usadas
 
 Algumas ferramentas foram usadas na elaboração deste projeto. Abaixo está uma lista com elas e seus respectivos links:
 
-- [create-react-app](https://github.com/facebookincubator/create-react-app);
+- [create-react-app](https://github.com/facebookincubator/create-react-app); -->
 
 ## Developers do projeto
 

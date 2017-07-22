@@ -1,0 +1,119 @@
+.paragrafo {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.termo {
+  border: 1px solid;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.header {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  height: 45px;
+  padding-left: 1em;
+}
+
+.headerTitle {
+  margin-bottom: 0;
+  margin-top: 1px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-right: 0.8em;
+}
+
+.footer {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  margin-top: auto;
+  padding: 0.8em 1em;
+}
+
+.button {
+  margin-left: 0.8em;
+}
+
+.modal {
+  :global(.ant-modal) {
+    max-width: 50% !important;
+    max-height: 90% !important;
+  }
+
+  :global(.ant-modal-body) {
+    padding: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal {
+    white-space: nowrap;
+
+    :global(.ant-modal) {
+      max-width: 80% !important;
+    }
+
+    :global(.ant-modal-content) {
+      max-height: 100%;
+    }
+  }
+}
+
+
+.items {
+  :global(.ant-form-item):not(:last-child) {
+    width: 95%;
+
+    :global(.ant-form-item-control-wrapper) {
+      width: 95%;
+
+      :global(.ant-form-item-control) {
+        width: 100%;
+
+        :global(.ant-calendar-picker) {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+
+  :global(.ant-form-item):last-child {
+    width: 100%;
+
+    :global(.ant-form-item-control-wrapper) {
+      width: 100%;
+
+      :global(.ant-form-item-control) {
+        width: 100%;
+
+        :global(.ant-input-number) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 599px) {
+  .items {
+    flex-direction: column !important;
+
+    :global(.ant-form-item):not(:last-child) {
+      width: 100%;
+
+      :global(.ant-form-item-control-wrapper) {
+        width: 100%;
+
+        :global(.ant-form-item-control) {
+          width: 100%;
+
+          :global(.ant-calendar-picker) {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

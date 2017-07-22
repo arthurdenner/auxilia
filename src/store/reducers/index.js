@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import app from './app';
 import auth from './auth';
-import informativos from './informativos';
+import modal from './modal';
 import programas from './programas';
+import selecoes from './selecoes';
 
 export default combineReducers({
   app,
   auth,
-  informativos,
+  modal,
   programas,
+  selecoes,
 });

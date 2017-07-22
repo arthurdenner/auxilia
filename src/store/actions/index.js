@@ -1,9 +1,11 @@
 import * as app from './app';
-import * as informativos from './informativos';
+import * as modal from './modal';
 import * as programas from './programas';
+import * as selecoes from './selecoes';
 
 export default {
   ...app,
-  ...informativos,
+  ...modal,
   ...programas,
+  ...selecoes,
 };

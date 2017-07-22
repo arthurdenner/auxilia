@@ -1,0 +1,15 @@
+{
+  "comments": false,
+  "plugins": [
+    "lodash",
+    ["import", { "libraryName": "antd", "style": "css" }],
+    ["transform-runtime", { "polyfill": false }],
+    ["module-resolver", { "alias": { "~": "./src" } }]
+  ],
+  "presets": ["env", "react", "stage-1"],
+  "env": {
+    "development": {
+      "plugins": ["react-hot-loader/babel"]
+    }
+  }
+}

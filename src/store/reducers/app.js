@@ -4,6 +4,6 @@ import actions from '../actions';
 
 export default combineReducers({
   selectedTab: handleActions({
-      [actions.selectTab]: (state, { payload }) => payload,
-    }, ['item_1']),
+    [actions.selectTab]: (state, { payload }) => payload,
+  }, ['item_1']),
 });

@@ -3,30 +3,35 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise-middleware';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { get, throttle } from 'lodash';
+import { appkey } from '~/constants';
 import reducers from './reducers';
-import { appkey } from '../constants';
 
 const loadState = () => {
   try {
     return JSON.parse(localStorage.getItem(appkey)) || {};
-  } catch(err) {
+  } catch (err) {
     return undefined;
   }
-}
+};
 
 const saveState = (state) => {
   try {
     localStorage.setItem(appkey, JSON.stringify(state));
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
-}
+};
 
 const middleware = composeWithDevTools(applyMiddleware(promise(), thunk));
 
 const store = createStore(reducers, loadState(), middleware);
 
-store.subscribe(throttle(() => saveState(store.getState())), 1000);
+store.subscribe(throttle(() => {
+  const { app: { selectedTab }, programas, selecoes /* , auth: { data }*/ } = store.getState();
+  const state = { app: { selectedTab }, programas, selecoes /* , auth: { data }*/ };
+
+  saveState(state, 1000);
+}));
 
 export const getData = (attr, notFound) => get(store.getState(), attr, notFound);
 
