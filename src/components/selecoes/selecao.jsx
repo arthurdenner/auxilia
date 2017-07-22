@@ -27,6 +27,7 @@ const Selecao = ({
     <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
     <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>
     <p><strong>Descrição: </strong>{selecao.descricao}</p>
+    <p><strong>Participantes: </strong>{selecao.participantes.length}</p>
     <FlexElement column>
       <Divider horizontal style={{ margin: '1em 0em' }} />
       {isServidor && (
