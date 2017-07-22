@@ -27,6 +27,10 @@ export const getPrograma = _id => find({ _id }, getProgramas());
 export const getSelecoes = () => getData('selecoes');
 export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes());
 export const getSelecao = _id => find({ _id }, getSelecoes());
+export const isInSelecao = (selecao) => {
+  const participantes = get('participantes', selecao, []);
+  return participantes.indexOf(getUser()._id) > -1;
+};
 
 // Modal
 export const isModalOpen = context => getData(`modal.${context}.isOpen`);

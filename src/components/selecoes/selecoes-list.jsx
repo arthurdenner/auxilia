@@ -12,7 +12,7 @@ const getSelecoes = (programa, selecoes) => {
   return filter(getId, selecoes);
 };
 
-const SelecoesGrid = ({ programas, selecoes }) => (
+const SelecoesList = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
       <CollapseOpen
@@ -26,9 +26,9 @@ const SelecoesGrid = ({ programas, selecoes }) => (
   </FlexElement>
 );
 
-SelecoesGrid.propTypes = {
+SelecoesList.propTypes = {
   programas: PropTypes.array.isRequired,
   selecoes: PropTypes.array.isRequired,
 };
 
-export default SelecoesGrid;
+export default SelecoesList;
