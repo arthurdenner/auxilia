@@ -20,9 +20,9 @@ const Selecao = ({ deleteSelecao, editSelecao, isServidor, selecao }) => (
       <FlexElement column>
         <Divider horizontal style={{ margin: '1em 0em' }} />
         <FlexElement className={styles.buttons}>
-          <Button icon="calendar" type="primary" className={styles.button}>
+          {/* <Button icon="calendar" type="primary" className={styles.button}>
             Ver seleção
-          </Button>
+          </Button>*/}
           <Button icon="edit" className={styles.button} onClick={() => editSelecao(selecao._id)}>
             Editar
           </Button>
