@@ -23,7 +23,7 @@ const Main = () => (
       <Switch>
         <Route exact path="/" component={Programas} />
         <Route path="/selecoes" component={Selecoes} />
-        <Route path="*" component={NotFound} />
+        <Route component={NotFound} />
       </Switch>
     </Content>
   </Layout>

@@ -10,7 +10,7 @@ import SelecoesList from '~/components/selecoes/selecoes-list';
 import filterByName from '~/helpers/filter-by-name';
 import * as selectors from '~/store/selectors';
 import actions from '~/store/actions';
-import styles from './main.less';
+import styles from './selecoes.less';
 
 class Selecoes extends PureComponent {
   static propTypes = {
