@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import { Route, Switch } from 'react-router-dom';
 import NotFound from '~/components/not-found';
 import Topbar from './topbar';
+import Cadastro from './cadastro';
 import Login from './login';
 import Programas from './programas';
 import Selecoes from './selecoes';
@@ -18,6 +19,7 @@ const Main = () => (
       </a>
       <Topbar />
       <Login />
+      <Cadastro />
     </Header>
     <Content className={styles.content}>
       <Switch>

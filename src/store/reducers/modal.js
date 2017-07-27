@@ -3,6 +3,12 @@ import { handleActions } from 'redux-actions';
 import actions from '~/store/actions';
 
 export default combineReducers({
+  cadastro: combineReducers({
+    isOpen: handleActions({
+      [actions.showModalCadastro]: () => true,
+      [actions.hideModalCadastro]: () => false,
+    }, false),
+  }),
   criarPrograma: combineReducers({
     idPrograma: handleActions({
       [actions.selectPrograma]: (state, { payload }) => payload,

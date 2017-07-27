@@ -22,6 +22,7 @@ const Selecao = ({
   isServidor,
   leaveSelecao,
   selecao,
+  showLogin,
 }) => (
   <CollapseOpen title={selecao.nome} wrapClass={styles.selecao}>
     <p><strong>Autor: </strong>{selecao.criador.nome}</p>
@@ -32,23 +33,19 @@ const Selecao = ({
     <p><strong>Participantes: </strong>{selecao.participantes.length}</p>
     <FlexElement column>
       <Divider horizontal style={{ margin: '1em 0em' }} />
-      {isServidor && (
+      {isServidor ? (
         <FooterServidor
           deleteSelecao={deleteSelecao}
           editSelecao={editSelecao}
           selecao={selecao}
         />
-      )}
-      {isAluno && (
+      ) : (
         <FooterAluno
-          enterSelecao={enterSelecao}
+          enterSelecao={_id => isLogged ? enterSelecao(_id) : showLogin()}
           leaveSelecao={leaveSelecao}
           selecao={selecao}
           isAlunoInSelecao={isAlunoInSelecao}
         />
-      )}
-      {!isLogged && (
-        <p>Você precisa estar logado para participar de uma seleção.</p>
       )}
     </FlexElement>
   </CollapseOpen>
@@ -64,6 +61,7 @@ Selecao.propTypes = {
   isServidor: PropTypes.bool.isRequired,
   leaveSelecao: PropTypes.func.isRequired,
   selecao: PropTypes.object.isRequired,
+  showLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, { selecao }) => ({
@@ -102,6 +100,7 @@ const mapDispatchToProps = dispatch => ({
       placement: 'bottomRight',
     });
   },
+  showLogin: () => dispatch(actions.showModalLogin()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Selecao);
