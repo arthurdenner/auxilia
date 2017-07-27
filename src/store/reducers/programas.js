@@ -20,4 +20,5 @@ export default handleActions({
   [actions.updatePrograma]: (state, { payload }) => state.map(programa =>
     programa._id === payload._id ? { ...programa, ...payload } : programa),
   [actions.deletePrograma]: (state, { payload }) => filter(({ _id }) => _id !== payload, state),
+  [actions.programas.fetch.resolve]: (state, { payload }) => [...state, ...payload],
 }, []);

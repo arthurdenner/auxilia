@@ -15,6 +15,7 @@ import styles from './main.less';
 class Programas extends PureComponent {
   static propTypes = {
     changeTab: PropTypes.func.isRequired,
+    fetchProgramas: PropTypes.func.isRequired,
     isServidor: PropTypes.bool.isRequired,
     programas: PropTypes.array.isRequired,
     showModal: PropTypes.func.isRequired,
@@ -22,7 +23,10 @@ class Programas extends PureComponent {
 
   state = { busca: '' };
 
-  componentDidMount() { this.props.changeTab('item_1'); }
+  componentDidMount() {
+    this.props.changeTab('item_1');
+    this.props.fetchProgramas();
+  }
 
   handleBusca = ({ target: { value } }) => this.setState({ busca: value });
 
@@ -65,6 +69,7 @@ const mapStateToProps = () => {
 const mapDispatchToProps = dispatch => ({
   changeTab: key => dispatch(actions.selectTab([key])),
   showModal: () => dispatch(actions.showModalCriarPrograma()),
+  fetchProgramas: () => dispatch(actions.programas.fetch.request()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Programas);

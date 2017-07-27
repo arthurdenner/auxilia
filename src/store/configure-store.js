@@ -1,10 +1,11 @@
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
-import promise from 'redux-promise-middleware';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { applyMiddleware, compose, createStore } from 'redux';
+import reduxSaga from 'redux-saga';
+// import promise from 'redux-promise-middleware';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import { get, throttle } from 'lodash';
 import { appkey } from '~/constants';
 import reducers from './reducers';
+import sagas from './sagas';
 
 const loadState = () => {
   try {
@@ -22,9 +23,12 @@ const saveState = (state) => {
   }
 };
 
-const middleware = composeWithDevTools(applyMiddleware(promise(), thunk));
+const saga = reduxSaga();
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const enhancer = composeEnhancers(applyMiddleware(saga));
+const store = createStore(reducers, loadState(), enhancer);
 
-const store = createStore(reducers, loadState(), middleware);
+saga.run(sagas);
 
 store.subscribe(throttle(() => {
   const { app: { selectedTab }, auth: { data }, programas, selecoes } = store.getState();
