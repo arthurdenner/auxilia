@@ -6,7 +6,7 @@ import Programa from '~/components/programas/programa';
 const ProgramasList = ({ programas }) => (
   <FlexElement full column>
     {programas.map(programa => (
-      <Programa key={programa._id} programa={programa} />
+      <Programa key={programa.id_programa} programa={programa} />
     ))}
   </FlexElement>
 );

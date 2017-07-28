@@ -10,8 +10,8 @@ import * as selectors from '~/store/selectors';
 import styles from './programa.less';
 
 const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
-  <CollapseOpen title={programa.nome} wrapClass={styles.collapse}>
-    <p><strong>Autor: </strong>{programa.criador.nome}</p>
+  <CollapseOpen title={programa.titulo} wrapClass={styles.collapse}>
+    <p><strong>Autor: </strong>{programa.criador}</p>
     <p><strong>Descrição: </strong>{programa.descricao}</p>
     {isServidor && (
       <FlexElement column>
