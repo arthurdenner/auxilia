@@ -7,7 +7,9 @@ import { getPrograma, getUser } from '~/store/selectors';
 // import selecoes from '~/_static/selecoes';
 
 export default handleActions({
-  [actions.addSelecao]: (state, { payload }) => [
+  [actions.addSelecao]: (state, { payload }) => {
+    console.log(getPrograma(Number(payload.programa)));
+    return [
     ...state,
     {
       ...payload,
@@ -18,11 +20,11 @@ export default handleActions({
       },
       programa: {
         _id: payload.programa,
-        nome: getPrograma(payload.programa).nome,
+        nome: getPrograma(Number(payload.programa)).titulo,
       },
       participantes: [],
     },
-  ],
+  ]},
   [actions.updateSelecao]: (state, { payload }) => state.map(selecao =>
     selecao._id === payload._id ? {
       ...selecao,

@@ -1,4 +1,4 @@
-import { fork } from 'redux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 import { map, unary } from 'lodash/fp';
 import programas from './programas';
 
@@ -7,5 +7,5 @@ export default function* () {
     programas,
   ];
 
-  yield map(unary(fork), _sagas);
+  yield all(map(unary(fork), _sagas));
 }

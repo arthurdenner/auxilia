@@ -14,12 +14,12 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
     <Form.Item hasFeedback label="Programa">
       {getFieldDecorator('programa', {
         ...programaRules,
-        initialValue: get('programa._id', selecao, ''),
+        initialValue: get('id_programa', selecao, ''),
       })(
         <Select showSearch placeholder="Programa da seleção">
           {programas.map(programa =>
-            <Select.Option key={programa._id} value={programa._id}>
-              {programa.nome}
+            <Select.Option key={programa.id_programa} value={String(programa.id_programa)}>
+              {programa.titulo}
             </Select.Option>,
           )}
         </Select>,

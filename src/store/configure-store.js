@@ -31,8 +31,8 @@ const store = createStore(reducers, loadState(), enhancer);
 saga.run(sagas);
 
 store.subscribe(throttle(() => {
-  const { app: { selectedTab }, auth: { data }, programas, selecoes } = store.getState();
-  const state = { app: { selectedTab }, auth: { data }, programas, selecoes };
+  const { app: { selectedTab }, auth: { data } } = store.getState();
+  const state = { app: { selectedTab }, auth: { data } };
 
   saveState(state, 1000);
 }));

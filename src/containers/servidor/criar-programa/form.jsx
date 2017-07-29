@@ -6,9 +6,9 @@ import { descricaoRules, nomeRules } from './rules';
 const FormPrograma = ({ getFieldDecorator, programa }) => (
   <Form style={{ width: '100%' }}>
     <Form.Item hasFeedback label="Nome do programa">
-      {getFieldDecorator('nome', {
+      {getFieldDecorator('titulo', {
         ...nomeRules,
-        initialValue: programa.nome,
+        initialValue: programa.titulo,
       })(
         <Input placeholder="Nome do programa" />,
       )}

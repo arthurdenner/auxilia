@@ -12,10 +12,13 @@ import styles from './criar-programa.less';
 
 class CriarPrograma extends PureComponent {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    createPrograma: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
+    hideModal: PropTypes.func.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
     programa: PropTypes.object,
+    updatePrograma: PropTypes.func.isRequired,
+    usuario: PropTypes.object.isRequired,
   };
 
   static defaultProps = {
@@ -27,12 +30,18 @@ class CriarPrograma extends PureComponent {
   };
 
   handleClose = () => {
-    this.props.dispatch(actions.hideModalCriarPrograma());
+    this.props.hideModal();
     this.setState({ modalKey: new Date().toJSON() });
   };
 
   handleSubmit = () => {
-    const { dispatch, form: { validateFields }, programa } = this.props;
+    const {
+      createPrograma,
+      form: { validateFields },
+      programa,
+      updatePrograma,
+      usuario,
+    } = this.props;
     const notify = () => notification.success({
       message: 'Sucesso!',
       description: `O programa foi ${isEmpty(programa) ? 'criado' : 'atualizado'} com sucesso!`,
@@ -42,9 +51,9 @@ class CriarPrograma extends PureComponent {
     validateFields((err, values) => {
       if (!err) {
         if (isEmpty(programa)) {
-          dispatch(actions.addPrograma(values));
+          createPrograma({ ...values, ...usuario });
         } else {
-          dispatch(actions.updatePrograma({ ...programa, ...values }));
+          updatePrograma({ ...programa, ...values });
         }
         this.handleClose();
         notify();
@@ -92,9 +101,15 @@ class CriarPrograma extends PureComponent {
 }
 
 const mapStateToProps = () => ({
+  usuario: selectors.getUser(),
   isModalOpen: selectors.isModalOpen('criarPrograma'),
   programa: selectors.getSelectedPrograma(),
 });
 
+const mapDispatchToProps = dispatch => ({
+  createPrograma: values => dispatch(actions.programas.add.request(values)),
+  updatePrograma: values => dispatch(actions.programas.update.request(values)),
+  hideModal: () => dispatch(actions.hideModalCriarPrograma()),
+});
 
-export default Form.create()(connect(mapStateToProps)(CriarPrograma));
+export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(CriarPrograma));

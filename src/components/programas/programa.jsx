@@ -17,7 +17,7 @@ const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
       <FlexElement column>
         <Divider horizontal style={{ margin: '1em 0em' }} />
         <FlexElement className={styles.buttons}>
-          <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa._id)}>
+          <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa.id_programa)}>
             Editar
           </Button>
           <Button icon="delete" className={styles.button} onClick={() => deletePrograma(programa._id)}>
@@ -49,8 +49,8 @@ const mapDispatchToProps = dispatch => ({
       placement: 'bottomRight',
     });
   },
-  editPrograma: (_id) => {
-    dispatch(actions.selectPrograma(_id));
+  editPrograma: (id) => {
+    dispatch(actions.programas.select(id));
     dispatch(actions.showModalCriarPrograma());
   },
 });

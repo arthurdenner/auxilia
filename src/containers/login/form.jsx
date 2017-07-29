@@ -6,7 +6,7 @@ import { generalRules } from './rules';
 const FormLogin = ({ getFieldDecorator }) => (
   <Form style={{ width: '100%' }}>
     <Form.Item hasFeedback label="Nome do usuário">
-      {getFieldDecorator('nome', generalRules)(
+      {getFieldDecorator('criador', generalRules)(
         <Input
           prefix={<Icon type="user" />}
           placeholder="Nome de usuário"
@@ -14,7 +14,7 @@ const FormLogin = ({ getFieldDecorator }) => (
       )}
     </Form.Item>
     <Form.Item hasFeedback label="Senha">
-      {getFieldDecorator('_id', generalRules)(
+      {getFieldDecorator('id_criador', generalRules)(
         <Input
           prefix={<Icon type="lock" />}
           placeholder="Senha"

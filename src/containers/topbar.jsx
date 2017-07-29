@@ -89,7 +89,7 @@ Topbar.defaultProps = {
 
 const mapStateToProps = () => ({
   isLogged: selectors.isLogged(),
-  username: selectors.getUser().nome,
+  username: selectors.getUser().criador,
   selectedTab: selectors.getSelectedTab(),
 });
 

@@ -14,6 +14,7 @@ import styles from './selecoes.less';
 
 class Selecoes extends PureComponent {
   static propTypes = {
+    fetchProgramas: PropTypes.func.isRequired,
     programas: PropTypes.array.isRequired,
     selecoes: PropTypes.array.isRequired,
     showModal: PropTypes.func.isRequired,
@@ -22,7 +23,12 @@ class Selecoes extends PureComponent {
   state = { busca: '' };
 
   componentDidMount() {
-    this.props.changeTab('item_2');
+    const { changeTab, fetchProgramas, programas } = this.props;
+
+    changeTab('item_2');
+    if (isEmpty(programas)) {
+      fetchProgramas();
+    }
   }
 
   handleBusca = ({ target: { value } }) => this.setState({ busca: value });
@@ -73,6 +79,7 @@ const mapStateToProps = () => {
 const mapDispatchToProps = dispatch => ({
   changeTab: key => dispatch(actions.selectTab([key])),
   showModal: () => dispatch(actions.showModalCriarSelecao()),
+  fetchProgramas: () => dispatch(actions.programas.fetch.request()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Selecoes);

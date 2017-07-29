@@ -11,7 +11,7 @@ export default combineReducers({
   }),
   criarPrograma: combineReducers({
     idPrograma: handleActions({
-      [actions.selectPrograma]: (state, { payload }) => payload,
+      [actions.programas.select]: (state, { payload }) => payload,
       [actions.hideModalCriarPrograma]: () => '',
     }, ''),
     isOpen: handleActions({

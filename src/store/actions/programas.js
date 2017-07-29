@@ -4,9 +4,15 @@ import defaultActionHandler from '~/helpers/action-handler';
 
 export default createActions({
   PROGRAMAS: {
-    ADD: defaultActionHandler,
+    ADD: {
+      REQUEST: defaultActionHandler,
+      RESOLVE: defaultActionHandler,
+    },
     DELETE: defaultActionHandler,
-    UPDATE: defaultActionHandler,
+    UPDATE: {
+      REQUEST: defaultActionHandler,
+      RESOLVE: defaultActionHandler,
+    },
     SELECT: defaultActionHandler,
     FETCH: {
       REQUEST: defaultActionHandler,
