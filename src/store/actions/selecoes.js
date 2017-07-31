@@ -20,5 +20,13 @@ export default createActions({
       REQUEST: defaultActionHandler,
       RESOLVE: defaultActionHandler,
     },
+    ENTER: {
+      REQUEST: defaultActionHandler,
+      RESOLVE: defaultActionHandler,
+    },
+    LEAVE: {
+      REQUEST: defaultActionHandler,
+      RESOLVE: defaultActionHandler,
+    },
   },
 });

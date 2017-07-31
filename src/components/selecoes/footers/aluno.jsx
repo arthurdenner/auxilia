@@ -10,7 +10,7 @@ const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, selecao }) 
       <Button
         icon="calendar"
         className={styles.button}
-        onClick={() => leaveSelecao(selecao._id)}
+        onClick={() => leaveSelecao(selecao.idSelecao)}
       >
         Sair da seleção
       </Button>
@@ -19,7 +19,7 @@ const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, selecao }) 
         icon="calendar"
         type="primary"
         className={styles.button}
-        onClick={() => enterSelecao(selecao._id)}
+        onClick={() => enterSelecao(selecao.idSelecao)}
       >
         Entrar na seleção
       </Button>

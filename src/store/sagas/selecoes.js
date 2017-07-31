@@ -52,9 +52,35 @@ function* deleteSelecao({ payload }) {
   }
 }
 
+function* enterSelecao({ payload: { idSelecao, idUsuario } }) {
+  const response = yield call(API.create, `selecao/${idSelecao}/participantes`, Number(idUsuario));
+
+  if (response.status === 201) {
+    notification('success', 'Você entrou na seleção!');
+    yield put(actions.selecoes.enter.resolve(response.data));
+  } else {
+    console.log(response);
+    // yield put(actions.selecoes.enter.resolve(new Error(FETCH_ERROR), e));
+  }
+}
+
+function* leaveSelecao({ payload: { idSelecao, idUsuario } }) {
+  const response = yield call(API.remove, `selecao/${idSelecao}/participantes`, Number(idUsuario));
+
+  if (response.status === 201) {
+    notification('success', 'Você saiu da seleção!');
+    yield put(actions.selecoes.leave.resolve(response.data));
+  } else {
+    console.log(response);
+    // yield put(actions.selecoes.leave.resolve(new Error(FETCH_ERROR), e));
+  }
+}
+
 export default function* () {
   yield takeEvery(actions.selecoes.fetch.request, fetchSelecoes);
   yield takeEvery(actions.selecoes.add.request, addSelecao);
   yield takeEvery(actions.selecoes.update.request, updateSelecao);
   yield takeEvery(actions.selecoes.delete.request, deleteSelecao);
+  yield takeEvery(actions.selecoes.enter.request, enterSelecao);
+  yield takeEvery(actions.selecoes.leave.request, leaveSelecao);
 }

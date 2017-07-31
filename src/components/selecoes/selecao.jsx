@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { notification } from 'antd';
 import formatDate from '~/helpers/format-date';
 import CollapseOpen from '~/components/collapse-open';
 import Divider from '~/components/divider';
@@ -23,6 +22,7 @@ const Selecao = ({
   leaveSelecao,
   selecao,
   showLogin,
+  usuario,
 }) => (
   <CollapseOpen title={selecao.nome} wrapClass={styles.selecao}>
     {/* <p><strong>Autor: </strong>{selecao.criador.nome}</p>*/}
@@ -41,8 +41,8 @@ const Selecao = ({
         />
       ) : (
         <FooterAluno
-          enterSelecao={_id => isLogged ? enterSelecao(_id) : showLogin()}
-          leaveSelecao={leaveSelecao}
+          enterSelecao={id => isLogged ? enterSelecao(id, usuario.idCriador) : showLogin()}
+          leaveSelecao={id => leaveSelecao(id, usuario.idCriador)}
           selecao={selecao}
           isAlunoInSelecao={isAlunoInSelecao}
         />
@@ -62,6 +62,7 @@ Selecao.propTypes = {
   leaveSelecao: PropTypes.func.isRequired,
   selecao: PropTypes.object.isRequired,
   showLogin: PropTypes.func.isRequired,
+  usuario: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state, { selecao }) => ({
@@ -69,30 +70,19 @@ const mapStateToProps = (state, { selecao }) => ({
   isLogged: selectors.isLogged(),
   isServidor: selectors.isTypeUser('servidor'),
   isAlunoInSelecao: selectors.isInSelecao(selecao),
+  usuario: selectors.getUser(),
 });
 
 const mapDispatchToProps = dispatch => ({
   deleteSelecao: id => dispatch(actions.selecoes.delete.request(id)),
-  editSelecao: (_id) => {
-    dispatch(actions.selecoes.select(_id));
+  editSelecao: (id) => {
+    dispatch(actions.selecoes.select(id));
     dispatch(actions.showModalCriarSelecao());
   },
-  enterSelecao: (_id) => {
-    dispatch(actions.enterSelecao(_id));
-    notification.success({
-      message: 'Sucesso!',
-      description: 'Você entrou na seleção!',
-      placement: 'bottomRight',
-    });
-  },
-  leaveSelecao: (_id) => {
-    dispatch(actions.leaveSelecao(_id));
-    notification.success({
-      message: 'Sucesso!',
-      description: 'Você saiu da seleção!',
-      placement: 'bottomRight',
-    });
-  },
+  enterSelecao: (idSelecao, idUsuario) =>
+    dispatch(actions.selecoes.enter.request({ idSelecao, idUsuario })),
+  leaveSelecao: (idSelecao, idUsuario) =>
+    dispatch(actions.selecoes.leave.request({ idSelecao, idUsuario })),
   showLogin: () => dispatch(actions.showModalLogin()),
 });
 
