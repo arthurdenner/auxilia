@@ -1,4 +1,3 @@
-// import { createAction } from 'redux-actions';
 import { createActions } from 'redux-actions';
 import defaultActionHandler from '~/helpers/action-handler';
 
@@ -8,7 +7,10 @@ export default createActions({
       REQUEST: defaultActionHandler,
       RESOLVE: defaultActionHandler,
     },
-    DELETE: defaultActionHandler,
+    DELETE: {
+      REQUEST: defaultActionHandler,
+      RESOLVE: defaultActionHandler,
+    },
     UPDATE: {
       REQUEST: defaultActionHandler,
       RESOLVE: defaultActionHandler,
@@ -20,8 +22,3 @@ export default createActions({
     },
   },
 });
-
-// export const addPrograma = createAction('ADD_PROGRAMA');
-// export const deletePrograma = createAction('DELETE_PROGRAMA');
-// export const updatePrograma = createAction('UPDATE_PROGRAMA');
-// export const selectPrograma = createAction('SELECT_PROGRAMA');

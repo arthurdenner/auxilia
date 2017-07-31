@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash/fp';
-import { Button, Form, notification } from 'antd';
+import { Button, Form } from 'antd';
 import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
 import actions from '~/store/actions';
@@ -42,11 +42,6 @@ class CriarPrograma extends PureComponent {
       updatePrograma,
       usuario,
     } = this.props;
-    const notify = () => notification.success({
-      message: 'Sucesso!',
-      description: `O programa foi ${isEmpty(programa) ? 'criado' : 'atualizado'} com sucesso!`,
-      placement: 'bottomRight',
-    });
 
     validateFields((err, values) => {
       if (!err) {
@@ -56,7 +51,6 @@ class CriarPrograma extends PureComponent {
           updatePrograma({ ...programa, ...values });
         }
         this.handleClose();
-        notify();
       }
     });
   }
