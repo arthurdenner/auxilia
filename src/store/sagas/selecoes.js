@@ -33,7 +33,6 @@ function* updateSelecao({ payload }) {
 
   if (response.status === 200) {
     notification('success', 'A seleção foi atualizada!');
-    yield put(actions.hideModalCriarSelecao());
     yield put(actions.selecoes.update.resolve(response.data));
   } else {
     console.log(response);

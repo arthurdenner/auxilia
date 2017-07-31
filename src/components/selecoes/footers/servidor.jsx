@@ -8,13 +8,13 @@ import styles from './footers.less';
 const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
   <FlexElement className={styles.buttons}>
     <NavLink to={`/selecoes/${selecao.idSelecao}`}>
-      <Button
+      {/* <Button
         icon="calendar"
         type="primary"
         className={styles.button}
       >
         Ver seleção
-      </Button>
+      </Button>*/}
     </NavLink>
     <Button
       icon="edit"

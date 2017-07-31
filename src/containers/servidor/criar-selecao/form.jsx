@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { get } from 'lodash/fp';
 import moment from 'moment';
 import { DatePicker, Form, Input, InputNumber, Select } from 'antd';
 import FlexElement from '~/components/flex-element';
@@ -14,11 +13,11 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
     <Form.Item hasFeedback label="Programa">
       {getFieldDecorator('idPrograma', {
         ...programaRules,
-        initialValue: String(get('idPrograma', selecao, '')),
+        initialValue: selecao.idPrograma && String(selecao.idPrograma),
       })(
         <Select showSearch placeholder="Programa da seleção">
           {programas.map(programa =>
-            <Select.Option key={programa.id_programa} value={String(programa.id_programa)}>
+            <Select.Option key={programa.idPrograma} value={String(programa.idPrograma)}>
               {programa.titulo}
             </Select.Option>,
           )}
@@ -45,7 +44,7 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
       <Form.Item hasFeedback label="Data de início">
         {getFieldDecorator('inicio', {
           ...dataRules,
-          initialValue: selecao.inicio && moment(`${selecao.inicio} 3:00`, 'YYYY/MM/DD HH:mm'),
+          initialValue: selecao.inicio && moment(selecao.inicio, 'YYYY/MM/DD HH:mm'),
         })(
           <DatePicker
             format="DD/MM/YYYY HH:mm"
@@ -73,7 +72,10 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
           ...vagasRules,
           initialValue: selecao.vagas,
         })(
-          <InputNumber placeholder="Número de vagas" />,
+          <InputNumber
+            min={1}
+            placeholder="Número de vagas"
+          />,
         )}
       </Form.Item>
     </FlexElement>

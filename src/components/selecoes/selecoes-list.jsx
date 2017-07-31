@@ -16,11 +16,11 @@ const SelecoesList = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
       <CollapseOpen
-        key={programa.id_programa}
+        key={programa.idPrograma}
         wrapClass={styles.collapse}
         title={`Programa ${programa.titulo}`}
       >
-        <Selecoes selecoes={getSelecoes(programa.id_programa, selecoes)} />
+        <Selecoes selecoes={getSelecoes(programa.idPrograma, selecoes)} />
       </CollapseOpen>,
     )}
   </FlexElement>

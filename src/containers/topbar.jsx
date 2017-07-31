@@ -14,7 +14,7 @@ const Topbar = ({
   handleDropdown,
   isLogged,
   selectedTab,
-  showCadastro,
+  // showCadastro,
   showLogin,
   username,
 }) => (
@@ -52,14 +52,14 @@ const Topbar = ({
       </Dropdown>
     ) : (
       <FlexElement>
-        <Button
+        {/* <Button
           type="primary"
           icon="solution"
           className={styles.login}
           onClick={() => showCadastro()}
         >
           Cadastrar
-        </Button>
+        </Button>*/}
         <Button
           type="primary"
           icon="login"
@@ -78,7 +78,7 @@ Topbar.propTypes = {
   handleDropdown: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   selectedTab: PropTypes.array.isRequired,
-  showCadastro: PropTypes.func.isRequired,
+  // showCadastro: PropTypes.func.isRequired,
   showLogin: PropTypes.func.isRequired,
   username: PropTypes.string,
 };

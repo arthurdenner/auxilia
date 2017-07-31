@@ -29,11 +29,10 @@ function* addPrograma({ payload }) {
 }
 
 function* updatePrograma({ payload }) {
-  const response = yield call(API.update, `programa/${payload.id_programa}`, payload);
+  const response = yield call(API.update, `programa/${payload.idPrograma}`, payload);
 
   if (response.status === 200) {
     notification('success', 'O programa foi atualizado!');
-    yield put(actions.hideModalCriarPrograma());
     yield put(actions.programas.update.resolve(response.data));
   } else {
     console.log(response);

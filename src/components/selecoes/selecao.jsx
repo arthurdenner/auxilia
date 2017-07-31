@@ -72,7 +72,7 @@ const mapStateToProps = (state, { selecao }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteSelecao: id => dispatch(actions.deleteSelecao(id)),
+  deleteSelecao: id => dispatch(actions.selecoes.delete.request(id)),
   editSelecao: (_id) => {
     dispatch(actions.selecoes.select(_id));
     dispatch(actions.showModalCriarSelecao());

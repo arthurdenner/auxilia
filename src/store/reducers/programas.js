@@ -6,10 +6,10 @@ export default handleActions({
   [actions.programas.add.resolve]: (state, { payload }) => [...state, payload],
 
   [actions.programas.update.resolve]: (state, { payload }) => state.map(programa =>
-    programa.id_programa === payload.id_programa ? payload : programa),
+    programa.idPrograma === payload.idPrograma ? payload : programa),
 
   [actions.programas.delete.resolve]: (state, { payload }) =>
-    filter(prog => prog.id_programa !== payload, state),
+    filter(prog => prog.idPrograma !== payload, state),
 
   [actions.programas.fetch.resolve]: (state, { payload }) => payload,
 }, []);

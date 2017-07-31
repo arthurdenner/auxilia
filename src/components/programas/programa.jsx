@@ -17,10 +17,10 @@ const Programa = ({ deletePrograma, editPrograma, isServidor, programa }) => (
       <FlexElement column>
         <Divider horizontal style={{ margin: '1em 0em' }} />
         <FlexElement className={styles.buttons}>
-          <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa.id_programa)}>
+          <Button icon="edit" className={styles.button} onClick={() => editPrograma(programa.idPrograma)}>
             Editar
           </Button>
-          <Button icon="delete" className={styles.button} onClick={() => deletePrograma(programa.id_programa)}>
+          <Button icon="delete" className={styles.button} onClick={() => deletePrograma(programa.idPrograma)}>
             Deletar
           </Button>
         </FlexElement>

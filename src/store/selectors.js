@@ -12,12 +12,12 @@ export const isLogged = () => !isEmpty(getData('auth.data'));
 export const isLogging = () => getData('auth.isLogging');
 
 // Geral
-export const isUserCriador = item => get('id_criador', item) === Number(getUser().id_criador);
+export const isUserCriador = item => get('idCriador', item) === Number(getUser().idCriador);
 
 // Programas
 export const getProgramas = () => getData('programas');
 export const getMeusProgramas = () => filter(isUserCriador, getProgramas());
-export const getPrograma = id_programa => find({ id_programa }, getProgramas());
+export const getPrograma = idPrograma => find({ idPrograma }, getProgramas());
 
 // Seleções
 export const getSelecoes = () => getData('selecoes');
@@ -25,7 +25,7 @@ export const getSelecoes = () => getData('selecoes');
 export const getSelecao = idSelecao => find({ idSelecao }, getSelecoes());
 export const isInSelecao = (selecao) => {
   const participantes = getOr([], 'participantes', selecao);
-  return participantes.indexOf(getUser().id_criador) > -1;
+  return participantes.indexOf(getUser().idCriador) > -1;
 };
 
 // Modal

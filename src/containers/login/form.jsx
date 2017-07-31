@@ -14,7 +14,7 @@ const FormLogin = ({ getFieldDecorator }) => (
       )}
     </Form.Item>
     <Form.Item hasFeedback label="Senha">
-      {getFieldDecorator('id_criador', generalRules)(
+      {getFieldDecorator('idCriador', generalRules)(
         <Input
           prefix={<Icon type="lock" />}
           placeholder="Senha"

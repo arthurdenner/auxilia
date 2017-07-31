@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash/fp';
-import { Button, Form, notification } from 'antd';
+import { Button, Form } from 'antd';
 import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
 import actions from '~/store/actions';
@@ -34,31 +34,29 @@ class CriarSelecao extends PureComponent {
 
   handleSubmit = () => {
     const { dispatch, form: { validateFields }, selecao } = this.props;
-    const notify = () => notification.success({
-      message: 'Sucesso!',
-      description: `A seleção foi ${isEmpty(selecao) ? 'criada' : 'atualizada'} com sucesso!`,
-      placement: 'bottomRight',
-    });
 
     validateFields((err, values) => {
       if (!err) {
         if (isEmpty(selecao)) {
           values = {
             ...values,
-            dataInicio: values.dataInicio.format('DD-MM-YYYY HH:mm'),
-            dataFinal: values.dataFinal.format('DD-MM-YYYY HH:mm'),
+            inicio: values.inicio.format('YYYY-MM-DD HH:mm'),
+            fim: values.fim.format('YYYY-MM-DD HH:mm'),
+            idCriador: selectors.getUser().idCriador,
+            criador: selectors.getUser().criador,
           };
           dispatch(actions.selecoes.add.request(values));
         } else {
           values = {
             ...values,
-            dataInicio: values.dataInicio.format('DD-MM-YYYY HH:mm'),
-            dataFinal: values.dataFinal.format('DD-MM-YYYY HH:mm'),
+            inicio: values.inicio.format('YYYY-MM-DD HH:mm'),
+            fim: values.fim.format('YYYY-MM-DD HH:mm'),
+            idCriador: selectors.getUser().idCriador,
+            criador: selectors.getUser().criador,
           };
           dispatch(actions.selecoes.update.request({ ...selecao, ...values }));
         }
         this.handleClose();
-        notify();
       }
     });
   }
