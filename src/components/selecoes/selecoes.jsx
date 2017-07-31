@@ -9,7 +9,7 @@ const Selecoes = ({ selecoes }) => (
     {isEmpty(selecoes) ?
       <span>Nenhuma seleção encontrada para este programa.</span> :
       selecoes.map(selecao => (
-        <Selecao key={selecao._id} selecao={selecao} />
+        <Selecao key={selecao.idSelecao} selecao={selecao} />
       ))}
   </FlexElement>
 );

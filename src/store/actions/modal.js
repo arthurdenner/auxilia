@@ -8,3 +8,6 @@ export const hideModalCriarSelecao = createAction('HIDE-CRIAR-SELECAO');
 
 export const showModalLogin = createAction('SHOW-LOGIN');
 export const hideModalLogin = createAction('HIDE-LOGIN');
+
+export const showModalCadastro = createAction('SHOW-CADASTRO');
+export const hideModalCadastro = createAction('HIDE-CADASTRO');

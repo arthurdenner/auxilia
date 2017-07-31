@@ -15,11 +15,11 @@ const styles = {
   },
 };
 
-const NotFound = () => (
+const NotFound = ({ match: { params: { idSelecao } } }) => (
   <FlexElement full column align="center" justify="center" style={styles.container}>
     <FlexElement column align="center" justify="center" as="h2">
       <Icon type="frown" style={styles.icon} />
-      <div>A página requisitada não existe</div>
+      <div>{idSelecao}</div>
     </FlexElement>
   </FlexElement>
 );

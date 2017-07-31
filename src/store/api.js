@@ -1,16 +1,16 @@
 import { delete as del, get, post, put } from 'axios';
 import { merge } from 'lodash';
 import { url } from '../constants';
-import { getAuth } from './selectors';
+// import { getAuth } from './selectors';
 
 export const getOptions = (options = {}) => {
-  const auth = getAuth();
+  // const auth = getAuth();
 
   return merge({}, {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `${auth.token_type} ${auth.access_token}`,
+      // Authorization: `${auth.token_type} ${auth.access_token}`,
     },
   }, options);
 };

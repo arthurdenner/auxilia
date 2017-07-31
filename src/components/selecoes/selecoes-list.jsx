@@ -7,7 +7,7 @@ import Selecoes from '~/components/selecoes/selecoes';
 import styles from './selecao.less';
 
 const getSelecoes = (programa, selecoes) => {
-  const getId = selecao => (get('programa._id', selecao) === programa);
+  const getId = selecao => (get('idPrograma', selecao) === programa);
 
   return filter(getId, selecoes);
 };
@@ -16,11 +16,11 @@ const SelecoesList = ({ programas, selecoes }) => (
   <FlexElement full column>
     {programas.map(programa =>
       <CollapseOpen
-        key={programa._id}
+        key={programa.idPrograma}
         wrapClass={styles.collapse}
-        title={`Programa ${programa.nome}`}
+        title={`Programa ${programa.titulo}`}
       >
-        <Selecoes selecoes={getSelecoes(programa._id, selecoes)} />
+        <Selecoes selecoes={getSelecoes(programa.idPrograma, selecoes)} />
       </CollapseOpen>,
     )}
   </FlexElement>

@@ -1,29 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 import { Button } from 'antd';
 import FlexElement from '~/components/flex-element';
 import styles from './footers.less';
 
 const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
   <FlexElement className={styles.buttons}>
-    {/* <Button
-      icon="calendar"
-      type="primary"
-      className={styles.button}
-    >
-      Ver seleção
-    </Button>*/}
+    <NavLink to={`/selecoes/${selecao.idSelecao}`}>
+      {/* <Button
+        icon="calendar"
+        type="primary"
+        className={styles.button}
+      >
+        Ver seleção
+      </Button>*/}
+    </NavLink>
     <Button
       icon="edit"
       className={styles.button}
-      onClick={() => editSelecao(selecao._id)}
+      onClick={() => editSelecao(selecao.idSelecao)}
     >
       Editar
     </Button>
     <Button
       icon="delete"
       className={styles.button}
-      onClick={() => deleteSelecao(selecao._id)}
+      onClick={() => deleteSelecao(selecao.idSelecao)}
     >
       Deletar
     </Button>

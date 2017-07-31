@@ -1,4 +1,4 @@
-import { filter, find, get, isEmpty } from 'lodash/fp';
+import { filter, find, get, getOr, isEmpty } from 'lodash/fp';
 import { getData } from './configure-store';
 
 // App
@@ -12,23 +12,20 @@ export const isLogged = () => !isEmpty(getData('auth.data'));
 export const isLogging = () => getData('auth.isLogging');
 
 // Geral
-export const isUserCriador = item => (
-  get('criador', item) === getUser()._id ||
-  get('criador._id', item) === getUser()._id
-);
+export const isUserCriador = item => get('idCriador', item) === Number(getUser().idCriador);
 
 // Programas
 export const getProgramas = () => getData('programas');
 export const getMeusProgramas = () => filter(isUserCriador, getProgramas());
-export const getPrograma = _id => find({ _id }, getProgramas());
+export const getPrograma = idPrograma => find({ idPrograma }, getProgramas());
 
 // Seleções
 export const getSelecoes = () => getData('selecoes');
-export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes());
-export const getSelecao = _id => find({ _id }, getSelecoes());
+// export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes()); // refazer
+export const getSelecao = idSelecao => find({ idSelecao }, getSelecoes());
 export const isInSelecao = (selecao) => {
-  const participantes = get('participantes', selecao, []);
-  return participantes.indexOf(getUser()._id) > -1;
+  const participantes = getOr([], 'participantes', selecao);
+  return participantes.indexOf(getUser().idCriador) > -1;
 };
 
 // Modal

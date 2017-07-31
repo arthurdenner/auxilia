@@ -9,7 +9,15 @@ import * as selectors from '~/store/selectors';
 import { menuOptions } from '~/constants';
 import styles from './topbar.less';
 
-const Topbar = ({ changeTab, handleDropdown, isLogged, selectedTab, showLogin, username }) => (
+const Topbar = ({
+  changeTab,
+  handleDropdown,
+  isLogged,
+  selectedTab,
+  // showCadastro,
+  showLogin,
+  username,
+}) => (
   <FlexElement full justify="space-between" className={styles.menu}>
     <Menu
       className={styles.menu}
@@ -43,13 +51,24 @@ const Topbar = ({ changeTab, handleDropdown, isLogged, selectedTab, showLogin, u
         </FlexElement>
       </Dropdown>
     ) : (
-      <Button
-        type="primary"
-        className={styles.login}
-        onClick={() => showLogin()}
-      >
-        Login
-      </Button>
+      <FlexElement>
+        {/* <Button
+          type="primary"
+          icon="solution"
+          className={styles.login}
+          onClick={() => showCadastro()}
+        >
+          Cadastrar
+        </Button>*/}
+        <Button
+          type="primary"
+          icon="login"
+          className={styles.login}
+          onClick={() => showLogin()}
+        >
+          Login
+        </Button>
+      </FlexElement>
     )}
   </FlexElement>
 );
@@ -59,6 +78,7 @@ Topbar.propTypes = {
   handleDropdown: PropTypes.func.isRequired,
   isLogged: PropTypes.bool.isRequired,
   selectedTab: PropTypes.array.isRequired,
+  // showCadastro: PropTypes.func.isRequired,
   showLogin: PropTypes.func.isRequired,
   username: PropTypes.string,
 };
@@ -69,7 +89,7 @@ Topbar.defaultProps = {
 
 const mapStateToProps = () => ({
   isLogged: selectors.isLogged(),
-  username: selectors.getUser().nome,
+  username: selectors.getUser().criador,
   selectedTab: selectors.getSelectedTab(),
 });
 
@@ -83,6 +103,7 @@ const mapDispatchToProps = dispatch => ({
       default:
     }
   },
+  showCadastro: () => dispatch(actions.showModalCadastro()),
   showLogin: () => dispatch(actions.showModalLogin()),
 });
 

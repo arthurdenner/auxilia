@@ -3,9 +3,15 @@ import { handleActions } from 'redux-actions';
 import actions from '~/store/actions';
 
 export default combineReducers({
+  cadastro: combineReducers({
+    isOpen: handleActions({
+      [actions.showModalCadastro]: () => true,
+      [actions.hideModalCadastro]: () => false,
+    }, false),
+  }),
   criarPrograma: combineReducers({
     idPrograma: handleActions({
-      [actions.selectPrograma]: (state, { payload }) => payload,
+      [actions.programas.select]: (state, { payload }) => payload,
       [actions.hideModalCriarPrograma]: () => '',
     }, ''),
     isOpen: handleActions({
@@ -15,7 +21,7 @@ export default combineReducers({
   }),
   criarSelecao: combineReducers({
     idSelecao: handleActions({
-      [actions.selectSelecao]: (state, { payload }) => payload,
+      [actions.selecoes.select]: (state, { payload }) => payload,
       [actions.hideModalCriarSelecao]: () => '',
     }, ''),
     isOpen: handleActions({

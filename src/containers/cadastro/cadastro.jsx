@@ -1,26 +1,19 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { isEmpty } from 'lodash/fp';
 import { Button, Form } from 'antd';
 import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
-import FormPrograma from './form';
-import styles from './criar-programa.less';
+import FormCadastro from './form';
+import styles from './cadastro.less';
 
-class CriarPrograma extends PureComponent {
+class Cadastro extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
-    programa: PropTypes.object,
-    usuario: PropTypes.object.isRequired,
-  };
-
-  static defaultProps = {
-    programa: {},
   };
 
   state = {
@@ -28,45 +21,39 @@ class CriarPrograma extends PureComponent {
   };
 
   handleClose = () => {
-    this.props.dispatch(actions.hideModalCriarPrograma());
+    this.props.dispatch(actions.hideModalCadastro());
     this.setState({ modalKey: new Date().toJSON() });
   };
 
   handleSubmit = () => {
-    const { dispatch, form: { validateFields }, programa, usuario } = this.props;
+    const { dispatch, form: { validateFields } } = this.props;
 
     validateFields((err, values) => {
       if (!err) {
-        if (isEmpty(programa)) {
-          dispatch(actions.programas.add.request({ ...values, ...usuario }));
-        } else {
-          dispatch(actions.programas.update.request({ ...programa, ...values }));
-        }
-        this.handleClose();
+        console.log(values);
+        // dispatch(actions.cadastro(values));
+        // this.handleClose();
       }
     });
   }
 
   render() {
-    const { form: { getFieldDecorator }, isModalOpen, programa } = this.props;
+    const { form, isModalOpen } = this.props;
     const { modalKey } = this.state;
 
     const config = {
-      title: isEmpty(programa) ? 'Criar programa' : 'Editar programa',
+      title: 'Cadastrar-se',
       handleClose: this.handleClose,
       content: (
-        <FormPrograma
-          getFieldDecorator={getFieldDecorator}
-          programa={programa}
-        />
+        <FormCadastro form={form} />
       ),
       footer: (
         <div>
           <Button onClick={this.handleClose}>
             Cancelar
           </Button>
-          <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
-            {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
+          <Button type="primary" icon="solution" className={styles.button} onClick={this.handleSubmit}>
+            Cadastrar-se
           </Button>
         </div>
       ),
@@ -87,9 +74,8 @@ class CriarPrograma extends PureComponent {
 }
 
 const mapStateToProps = () => ({
-  usuario: selectors.getUser(),
-  isModalOpen: selectors.isModalOpen('criarPrograma'),
-  programa: selectors.getSelectedPrograma(),
+  isModalOpen: selectors.isModalOpen('cadastro'),
 });
 
-export default Form.create()(connect(mapStateToProps)(CriarPrograma));
+
+export default Form.create()(connect(mapStateToProps)(Cadastro));

@@ -1,6 +1,6 @@
 export const appkey = 'auxilia';
 
-export const url = 'https://api.auxilia.com';
+export const url = 'http://clevison.pythonanywhere.com/api';
 
 export const menuOptions = [
   {
