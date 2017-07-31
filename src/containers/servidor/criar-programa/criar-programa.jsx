@@ -12,12 +12,10 @@ import styles from './criar-programa.less';
 
 class CriarPrograma extends PureComponent {
   static propTypes = {
-    createPrograma: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
-    hideModal: PropTypes.func.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
     programa: PropTypes.object,
-    updatePrograma: PropTypes.func.isRequired,
     usuario: PropTypes.object.isRequired,
   };
 
@@ -30,25 +28,19 @@ class CriarPrograma extends PureComponent {
   };
 
   handleClose = () => {
-    this.props.hideModal();
+    this.props.dispatch(actions.hideModalCriarPrograma());
     this.setState({ modalKey: new Date().toJSON() });
   };
 
   handleSubmit = () => {
-    const {
-      createPrograma,
-      form: { validateFields },
-      programa,
-      updatePrograma,
-      usuario,
-    } = this.props;
+    const { dispatch, form: { validateFields }, programa, usuario } = this.props;
 
     validateFields((err, values) => {
       if (!err) {
         if (isEmpty(programa)) {
-          createPrograma({ ...values, ...usuario });
+          dispatch(actions.programas.add.request({ ...values, ...usuario }));
         } else {
-          updatePrograma({ ...programa, ...values });
+          dispatch(actions.programas.update.request({ ...programa, ...values }));
         }
         this.handleClose();
       }
@@ -100,10 +92,4 @@ const mapStateToProps = () => ({
   programa: selectors.getSelectedPrograma(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  createPrograma: values => dispatch(actions.programas.add.request(values)),
-  updatePrograma: values => dispatch(actions.programas.update.request(values)),
-  hideModal: () => dispatch(actions.hideModalCriarPrograma()),
-});
-
-export default Form.create()(connect(mapStateToProps, mapDispatchToProps)(CriarPrograma));
+export default Form.create()(connect(mapStateToProps)(CriarPrograma));

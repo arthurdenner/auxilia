@@ -21,7 +21,7 @@ export default combineReducers({
   }),
   criarSelecao: combineReducers({
     idSelecao: handleActions({
-      [actions.selectSelecao]: (state, { payload }) => payload,
+      [actions.selecoes.select]: (state, { payload }) => payload,
       [actions.hideModalCriarSelecao]: () => '',
     }, ''),
     isOpen: handleActions({

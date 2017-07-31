@@ -45,17 +45,17 @@ class CriarSelecao extends PureComponent {
         if (isEmpty(selecao)) {
           values = {
             ...values,
-            dataInicio: values.dataInicio.format('YYYY-MM-DD HH:mm:ss'),
-            dataFinal: values.dataFinal.format('YYYY-MM-DD HH:mm:ss'),
+            dataInicio: values.dataInicio.format('DD-MM-YYYY HH:mm'),
+            dataFinal: values.dataFinal.format('DD-MM-YYYY HH:mm'),
           };
-          dispatch(actions.addSelecao(values));
+          dispatch(actions.selecoes.add.request(values));
         } else {
           values = {
             ...values,
-            dataInicio: values.dataInicio.format('YYYY-MM-DD HH:mm:ss'),
-            dataFinal: values.dataFinal.format('YYYY-MM-DD HH:mm:ss'),
+            dataInicio: values.dataInicio.format('DD-MM-YYYY HH:mm'),
+            dataFinal: values.dataFinal.format('DD-MM-YYYY HH:mm'),
           };
-          dispatch(actions.updateSelecao({ ...selecao, ...values }));
+          dispatch(actions.selecoes.update.request({ ...selecao, ...values }));
         }
         this.handleClose();
         notify();

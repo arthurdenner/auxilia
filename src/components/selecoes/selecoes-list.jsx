@@ -7,7 +7,7 @@ import Selecoes from '~/components/selecoes/selecoes';
 import styles from './selecao.less';
 
 const getSelecoes = (programa, selecoes) => {
-  const getId = selecao => (get('programa.id_programa', selecao) === programa);
+  const getId = selecao => (get('idPrograma', selecao) === programa);
 
   return filter(getId, selecoes);
 };

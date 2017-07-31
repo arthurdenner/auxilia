@@ -1,4 +1,4 @@
-import { filter, find, get, isEmpty } from 'lodash/fp';
+import { filter, find, get, getOr, isEmpty } from 'lodash/fp';
 import { getData } from './configure-store';
 
 // App
@@ -21,10 +21,10 @@ export const getPrograma = id_programa => find({ id_programa }, getProgramas());
 
 // Seleções
 export const getSelecoes = () => getData('selecoes');
-export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes());
-export const getSelecao = _id => find({ _id }, getSelecoes());
+// export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes()); // refazer
+export const getSelecao = idSelecao => find({ idSelecao }, getSelecoes());
 export const isInSelecao = (selecao) => {
-  const participantes = get('participantes', selecao, []);
+  const participantes = getOr([], 'participantes', selecao);
   return participantes.indexOf(getUser().id_criador) > -1;
 };
 

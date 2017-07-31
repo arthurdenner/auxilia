@@ -16,7 +16,7 @@ const Selecao = ({
   deleteSelecao,
   editSelecao,
   enterSelecao,
-  isAluno,
+  // isAluno,
   isAlunoInSelecao,
   isLogged,
   isServidor,
@@ -25,12 +25,12 @@ const Selecao = ({
   showLogin,
 }) => (
   <CollapseOpen title={selecao.nome} wrapClass={styles.selecao}>
-    <p><strong>Autor: </strong>{selecao.criador.nome}</p>
+    {/* <p><strong>Autor: </strong>{selecao.criador.nome}</p>*/}
     <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
-    <p><strong>Data de Início: </strong>{formatDate(selecao.dataInicio)}</p>
-    <p><strong>Data Final: </strong>{formatDate(selecao.dataFinal)}</p>
+    <p><strong>Data de Início: </strong>{formatDate(selecao.inicio)}</p>
+    <p><strong>Data Final: </strong>{formatDate(selecao.fim)}</p>
     <p><strong>Descrição: </strong>{selecao.descricao}</p>
-    <p><strong>Participantes: </strong>{selecao.participantes.length}</p>
+    {/* <p><strong>Participantes: </strong>{selecao.participantes.length}</p>*/}
     <FlexElement column>
       <Divider horizontal style={{ margin: '1em 0em' }} />
       {isServidor ? (
@@ -55,7 +55,7 @@ Selecao.propTypes = {
   deleteSelecao: PropTypes.func.isRequired,
   editSelecao: PropTypes.func.isRequired,
   enterSelecao: PropTypes.func.isRequired,
-  isAluno: PropTypes.bool.isRequired,
+  // isAluno: PropTypes.bool.isRequired,
   isAlunoInSelecao: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   isServidor: PropTypes.bool.isRequired,
@@ -65,23 +65,16 @@ Selecao.propTypes = {
 };
 
 const mapStateToProps = (state, { selecao }) => ({
-  isAluno: selectors.isTypeUser('aluno'),
+  // isAluno: selectors.isTypeUser('aluno'),
   isLogged: selectors.isLogged(),
   isServidor: selectors.isTypeUser('servidor'),
   isAlunoInSelecao: selectors.isInSelecao(selecao),
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteSelecao: (_id) => {
-    dispatch(actions.deleteSelecao(_id));
-    notification.success({
-      message: 'Sucesso!',
-      description: 'A seleção foi removida com sucesso!',
-      placement: 'bottomRight',
-    });
-  },
+  deleteSelecao: id => dispatch(actions.deleteSelecao(id)),
   editSelecao: (_id) => {
-    dispatch(actions.selectSelecao(_id));
+    dispatch(actions.selecoes.select(_id));
     dispatch(actions.showModalCriarSelecao());
   },
   enterSelecao: (_id) => {

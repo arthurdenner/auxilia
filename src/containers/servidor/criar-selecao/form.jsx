@@ -12,9 +12,9 @@ const disabledDate = current => current && current.valueOf() < Date.now();
 const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
   <Form style={{ width: '100%' }}>
     <Form.Item hasFeedback label="Programa">
-      {getFieldDecorator('programa', {
+      {getFieldDecorator('idPrograma', {
         ...programaRules,
-        initialValue: get('id_programa', selecao, ''),
+        initialValue: String(get('idPrograma', selecao, '')),
       })(
         <Select showSearch placeholder="Programa da seleção">
           {programas.map(programa =>
@@ -43,28 +43,28 @@ const FormSelecao = ({ getFieldDecorator, programas, selecao }) => (
     </Form.Item>
     <FlexElement justify="space-between" className={styles.items}>
       <Form.Item hasFeedback label="Data de início">
-        {getFieldDecorator('dataInicio', {
+        {getFieldDecorator('inicio', {
           ...dataRules,
-          initialValue: selecao.dataInicio && moment(selecao.dataInicio, 'YYYY/MM/DD HH:mm:ss'),
+          initialValue: selecao.inicio && moment(`${selecao.inicio} 3:00`, 'YYYY/MM/DD HH:mm'),
         })(
           <DatePicker
-            format="DD/MM/YYYY HH:mm:ss"
+            format="DD/MM/YYYY HH:mm"
             placeholder="Data de início"
             disabledDate={disabledDate}
-            showTime={{ defaultValue: moment('00:00:01', 'HH:mm:ss') }}
+            showTime={{ defaultValue: moment('00:00:01', 'HH:mm') }}
           />,
         )}
       </Form.Item>
       <Form.Item hasFeedback label="Data final">
-        {getFieldDecorator('dataFinal', {
+        {getFieldDecorator('fim', {
           ...dataRules,
-          initialValue: selecao.dataFinal && moment(selecao.dataFinal, 'YYYY/MM/DD HH:mm:ss'),
+          initialValue: selecao.fim && moment(selecao.fim, 'YYYY/MM/DD HH:mm'),
         })(
           <DatePicker
-            format="DD/MM/YYYY HH:mm:ss"
+            format="DD/MM/YYYY HH:mm"
             placeholder="Data final"
             disabledDate={disabledDate}
-            showTime={{ defaultValue: moment('23:59:59', 'HH:mm:ss') }}
+            showTime={{ defaultValue: moment('23:59:59', 'HH:mm') }}
           />,
         )}
       </Form.Item>

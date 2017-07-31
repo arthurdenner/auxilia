@@ -7,7 +7,7 @@ import styles from './footers.less';
 
 const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
   <FlexElement className={styles.buttons}>
-    <NavLink to={`/selecoes/${selecao._id}`}>
+    <NavLink to={`/selecoes/${selecao.idSelecao}`}>
       <Button
         icon="calendar"
         type="primary"
@@ -19,14 +19,14 @@ const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
     <Button
       icon="edit"
       className={styles.button}
-      onClick={() => editSelecao(selecao._id)}
+      onClick={() => editSelecao(selecao.idSelecao)}
     >
       Editar
     </Button>
     <Button
       icon="delete"
       className={styles.button}
-      onClick={() => deleteSelecao(selecao._id)}
+      onClick={() => deleteSelecao(selecao.idSelecao)}
     >
       Deletar
     </Button>

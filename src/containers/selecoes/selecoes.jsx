@@ -15,6 +15,7 @@ import styles from './selecoes.less';
 class Selecoes extends PureComponent {
   static propTypes = {
     fetchProgramas: PropTypes.func.isRequired,
+    fetchSelecoes: PropTypes.func.isRequired,
     programas: PropTypes.array.isRequired,
     selecoes: PropTypes.array.isRequired,
     showModal: PropTypes.func.isRequired,
@@ -23,11 +24,12 @@ class Selecoes extends PureComponent {
   state = { busca: '' };
 
   componentDidMount() {
-    const { changeTab, fetchProgramas, programas } = this.props;
+    const { changeTab, fetchProgramas, fetchSelecoes, programas } = this.props;
 
     changeTab('item_2');
     if (isEmpty(programas)) {
       fetchProgramas();
+      fetchSelecoes();
     }
   }
 
@@ -70,7 +72,8 @@ Selecoes.propTypes = {
 const mapStateToProps = () => {
   const isServidor = selectors.isTypeUser('servidor');
   const programas = isServidor ? selectors.getMeusProgramas() : selectors.getProgramas();
-  const selecoes = isServidor ? selectors.getMinhasSelecoes() : selectors.getSelecoes();
+  // const selecoes = isServidor ? selectors.getMinhasSelecoes() : selectors.getSelecoes();
+  const selecoes = selectors.getSelecoes();
 
   return ({ isServidor, programas, selecoes });
 };
@@ -80,6 +83,7 @@ const mapDispatchToProps = dispatch => ({
   changeTab: key => dispatch(actions.selectTab([key])),
   showModal: () => dispatch(actions.showModalCriarSelecao()),
   fetchProgramas: () => dispatch(actions.programas.fetch.request()),
+  fetchSelecoes: () => dispatch(actions.selecoes.fetch.request()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Selecoes);
