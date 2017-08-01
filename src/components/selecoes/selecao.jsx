@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import formatDate from '~/helpers/format-date';
+import notification from '~/helpers/notification';
 import CollapseOpen from '~/components/collapse-open';
 import Divider from '~/components/divider';
 import FlexElement from '~/components/flex-element';
@@ -76,7 +77,11 @@ const mapStateToProps = (state, { selecao }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteSelecao: id => dispatch(actions.selecoes.delete.request(id)),
+  deleteSelecao: id => dispatch(actions.selecoes.delete.request({
+    data: id,
+    onSuccess: () => notification('success', 'A seleção foi deletada!'),
+    onError: () => notification('error', 'Houve um erro na requisição!'),
+  })),
   editSelecao: (id) => {
     dispatch(actions.selecoes.select(id));
     dispatch(actions.showModalCriarSelecao());

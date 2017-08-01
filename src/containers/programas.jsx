@@ -8,6 +8,7 @@ import EmptyContent from '~/components/empty-content';
 import FlexElement from '~/components/flex-element';
 import ProgramasList from '~/components/programas/programas-list';
 import filterByName from '~/helpers/filter-by-name';
+import notification from '~/helpers/notification';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import styles from './main.less';
@@ -25,7 +26,11 @@ class Programas extends PureComponent {
 
   componentDidMount() {
     this.props.changeTab('item_1');
-    this.props.fetchProgramas();
+    this.props.fetchProgramas({
+      onError: () => {
+        notification('error', 'Houve um erro na requisição!');
+      },
+    });
   }
 
   handleBusca = ({ target: { value } }) => this.setState({ busca: value });

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash/fp';
 import { Button, Form } from 'antd';
+import notification from '~/helpers/notification';
 import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
 import actions from '~/store/actions';
@@ -46,7 +47,16 @@ class CriarSelecao extends PureComponent {
             idCriador: selectors.getUser().idCriador,
             criador: selectors.getUser().criador,
           };
-          dispatch(actions.selecoes.add.request(values));
+          dispatch(actions.selecoes.add.request({
+            data: values,
+            onSuccess: () => {
+              notification('success', 'A seleção foi criada!');
+              this.handleClose();
+            },
+            onError: () => {
+              notification('error', 'Houve um erro na requisição!');
+            },
+          }));
         } else {
           values = {
             ...values,
@@ -55,9 +65,17 @@ class CriarSelecao extends PureComponent {
             idCriador: selectors.getUser().idCriador,
             criador: selectors.getUser().criador,
           };
-          dispatch(actions.selecoes.update.request({ ...selecao, ...values }));
+          dispatch(actions.selecoes.update.request({
+            data: { ...selecao, ...values },
+            onSuccess: () => {
+              notification('success', 'A seleção foi atualizada!');
+              this.handleClose();
+            },
+            onError: () => {
+              notification('error', 'Houve um erro na requisição!');
+            },
+          }));
         }
-        this.handleClose();
       }
     });
   }

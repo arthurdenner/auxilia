@@ -1,18 +1,18 @@
-import notification from '~/helpers/notification';
 import { put, call, takeEvery } from 'redux-saga/effects';
 import actions from '../actions';
 import * as API from '../api';
 
-const FETCH_ERROR = 'Houve um erro na requisição.';
-
-function* fetchProgramas() {
+function* fetchProgramas({ onError }) {
   const response = yield call(API.read, 'programa/');
 
   if (response.status === 200) {
     yield put(actions.programas.fetch.resolve(response.data));
   } else {
-    console.log(response);
-    yield put(actions.programas.fetch.resolve(new Error(FETCH_ERROR)));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.programas.fetch.error());
   }
 }
 
@@ -52,15 +52,21 @@ function* updatePrograma({ payload: { data, onSuccess, onError } }) {
   }
 }
 
-function* deletePrograma({ payload }) {
-  const response = yield call(API.remove, `programa/${payload}`);
+function* deletePrograma({ payload: { data, onSuccess, onError } }) {
+  const response = yield call(API.remove, `programa/${data}`);
 
   if (response.status === 204) {
-    notification('success', 'O programa foi deletado!');
-    yield put(actions.programas.delete.resolve(payload));
+    if (onSuccess) {
+      onSuccess();
+    }
+
+    yield put(actions.programas.delete.resolve(data));
   } else {
-    console.log(response);
-    // yield put(actions.programas.delete.resolve(new Error(FETCH_ERROR), e));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.programas.delete.resolve());
   }
 }
 

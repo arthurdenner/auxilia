@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
+import notification from '~/helpers/notification';
 import CollapseOpen from '~/components/collapse-open';
 import Divider from '~/components/divider';
 import FlexElement from '~/components/flex-element';
@@ -48,7 +49,11 @@ const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  deletePrograma: id => dispatch(actions.programas.delete.request(id)),
+  deletePrograma: id => dispatch(actions.programas.delete.request({
+    data: id,
+    onSuccess: () => notification('success', 'O programa foi deletado!'),
+    onError: () => notification('error', 'Houve um erro na requisição!'),
+  })),
   editPrograma: (id) => {
     dispatch(actions.programas.select(id));
     dispatch(actions.showModalCriarPrograma());
