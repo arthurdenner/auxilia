@@ -87,9 +87,17 @@ const mapDispatchToProps = dispatch => ({
     dispatch(actions.showModalCriarSelecao());
   },
   enterSelecao: (idSelecao, idUsuario) =>
-    dispatch(actions.selecoes.enter.request({ idSelecao, idUsuario })),
+    dispatch(actions.selecoes.enter.request({
+      data: { idSelecao, idUsuario },
+      onSuccess: () => notification('success', 'Você entrou na seleção!'),
+      onError: () => notification('error', 'Houve um erro na requisição!'),
+    })),
   leaveSelecao: (idSelecao, idUsuario) =>
-    dispatch(actions.selecoes.leave.request({ idSelecao, idUsuario })),
+    dispatch(actions.selecoes.leave.request({
+      data: { idSelecao, idUsuario },
+      onSuccess: () => notification('success', 'Você saiu da seleção!'),
+      onError: () => notification('error', 'Houve um erro na requisição!'),
+    })),
   showLogin: () => dispatch(actions.showModalLogin()),
 });
 

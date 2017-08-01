@@ -26,15 +26,15 @@ class Cadastro extends PureComponent {
   };
 
   handleSubmit = () => {
-    const { dispatch, form: { validateFields } } = this.props;
+    // const { /* dispatch,*/ form: { validateFields } } = this.props;
 
-    validateFields((err, values) => {
-      if (!err) {
-        console.log(values);
+    // validateFields((err, values) => {
+      // if (!err) {
+        // console.log(values);
         // dispatch(actions.cadastro(values));
         // this.handleClose();
-      }
-    });
+      // }
+    // });
   }
 
   render() {

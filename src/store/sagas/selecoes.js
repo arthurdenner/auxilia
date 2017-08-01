@@ -1,4 +1,3 @@
-import notification from '~/helpers/notification';
 import { put, call, takeEvery } from 'redux-saga/effects';
 import actions from '../actions';
 import * as API from '../api';
@@ -71,27 +70,39 @@ function* deleteSelecao({ payload: { data, onSuccess, onError } }) {
   }
 }
 
-function* enterSelecao({ payload: { idSelecao, idUsuario } }) {
+function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
   const response = yield call(API.create, `selecao/${idSelecao}/participantes`, Number(idUsuario));
 
   if (response.status === 201) {
-    notification('success', 'Você entrou na seleção!');
+    if (onSuccess) {
+      onSuccess();
+    }
+
     yield put(actions.selecoes.enter.resolve(response.data));
   } else {
-    console.log(response);
-    // yield put(actions.selecoes.enter.resolve(new Error(FETCH_ERROR), e));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.enter.resolve());
   }
 }
 
-function* leaveSelecao({ payload: { idSelecao, idUsuario } }) {
+function* leaveSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
   const response = yield call(API.remove, `selecao/${idSelecao}/participantes`, Number(idUsuario));
 
   if (response.status === 201) {
-    notification('success', 'Você saiu da seleção!');
+    if (onSuccess) {
+      onSuccess();
+    }
+
     yield put(actions.selecoes.leave.resolve(response.data));
   } else {
-    console.log(response);
-    // yield put(actions.selecoes.leave.resolve(new Error(FETCH_ERROR), e));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.leave.error());
   }
 }
 
