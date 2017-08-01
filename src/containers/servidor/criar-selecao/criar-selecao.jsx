@@ -14,6 +14,7 @@ class CriarSelecao extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
     programas: PropTypes.array.isRequired,
     selecao: PropTypes.object,
@@ -62,7 +63,7 @@ class CriarSelecao extends PureComponent {
   }
 
   render() {
-    const { form: { getFieldDecorator }, isModalOpen, programas, selecao } = this.props;
+    const { form: { getFieldDecorator }, isLoading, isModalOpen, programas, selecao } = this.props;
     const { modalKey } = this.state;
 
     const config = {
@@ -80,7 +81,13 @@ class CriarSelecao extends PureComponent {
           <Button onClick={this.handleClose}>
             Cancelar
           </Button>
-          <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
+          <Button
+            type="primary"
+            icon="check"
+            className={styles.button}
+            onClick={this.handleSubmit}
+            loading={isLoading}
+          >
             {isEmpty(selecao) ? 'Criar seleção' : 'Editar seleção'}
           </Button>
         </div>
@@ -102,6 +109,7 @@ class CriarSelecao extends PureComponent {
 }
 
 const mapStateToProps = () => ({
+  isLoading: selectors.isLoading(),
   isModalOpen: selectors.isModalOpen('criarSelecao'),
   programas: selectors.getMeusProgramas(),
   selecao: selectors.getSelectedSelecao(),

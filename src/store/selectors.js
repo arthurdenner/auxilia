@@ -3,6 +3,7 @@ import { getData } from './configure-store';
 
 // App
 export const getSelectedTab = () => getData('app.selectedTab');
+export const isLoading = () => getData('app.loading');
 
 // Auth
 export const getAuth = () => getData('auth.data');

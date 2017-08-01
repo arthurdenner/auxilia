@@ -5,7 +5,7 @@ import { Button } from 'antd';
 import FlexElement from '~/components/flex-element';
 import styles from './footers.less';
 
-const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
+const FooterServidor = ({ deleteSelecao, editSelecao, isLoading, selecao }) => (
   <FlexElement className={styles.buttons}>
     <NavLink to={`/selecoes/${selecao.idSelecao}`}>
       {/* <Button
@@ -26,6 +26,7 @@ const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
     <Button
       icon="delete"
       className={styles.button}
+      loading={isLoading}
       onClick={() => deleteSelecao(selecao.idSelecao)}
     >
       Deletar
@@ -36,6 +37,7 @@ const FooterServidor = ({ deleteSelecao, editSelecao, selecao }) => (
 FooterServidor.propTypes = {
   deleteSelecao: PropTypes.func.isRequired,
   editSelecao: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   selecao: PropTypes.object.isRequired,
 };
 

@@ -5,6 +5,7 @@ import { isEmpty } from 'lodash/fp';
 import { Button, Form } from 'antd';
 import ConteudoModal from '~/components/conteudo-modal';
 import Modal from '~/components/modal';
+import notification from '~/helpers/notification';
 import actions from '~/store/actions';
 import * as selectors from '~/store/selectors';
 import FormPrograma from './form';
@@ -14,6 +15,7 @@ class CriarPrograma extends PureComponent {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
     form: PropTypes.object.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     isModalOpen: PropTypes.bool.isRequired,
     programa: PropTypes.object,
     usuario: PropTypes.object.isRequired,
@@ -38,17 +40,34 @@ class CriarPrograma extends PureComponent {
     validateFields((err, values) => {
       if (!err) {
         if (isEmpty(programa)) {
-          dispatch(actions.programas.add.request({ ...values, ...usuario }));
+          dispatch(actions.programas.add.request({
+            data: { ...values, ...usuario },
+            onSuccess: () => {
+              notification('success', 'O programa foi criado!');
+              this.handleClose();
+            },
+            onError: () => {
+              notification('error', 'Houve um erro na requisição!');
+            },
+          }));
         } else {
-          dispatch(actions.programas.update.request({ ...programa, ...values }));
+          dispatch(actions.programas.update.request({
+            data: { ...programa, ...values },
+            onSuccess: () => {
+              notification('success', 'O programa foi atualizado!');
+              this.handleClose();
+            },
+            onError: () => {
+              notification('error', 'Houve um erro na requisição!');
+            },
+          }));
         }
-        this.handleClose();
       }
     });
   }
 
   render() {
-    const { form: { getFieldDecorator }, isModalOpen, programa } = this.props;
+    const { form: { getFieldDecorator }, isLoading, isModalOpen, programa } = this.props;
     const { modalKey } = this.state;
 
     const config = {
@@ -65,7 +84,13 @@ class CriarPrograma extends PureComponent {
           <Button onClick={this.handleClose}>
             Cancelar
           </Button>
-          <Button type="primary" icon="check" className={styles.button} onClick={this.handleSubmit}>
+          <Button
+            type="primary"
+            icon="check"
+            className={styles.button}
+            onClick={this.handleSubmit}
+            loading={isLoading}
+          >
             {isEmpty(programa) ? 'Criar programa' : 'Editar programa'}
           </Button>
         </div>
@@ -88,6 +113,7 @@ class CriarPrograma extends PureComponent {
 
 const mapStateToProps = () => ({
   usuario: selectors.getUser(),
+  isLoading: selectors.isLoading(),
   isModalOpen: selectors.isModalOpen('criarPrograma'),
   programa: selectors.getSelectedPrograma(),
 });

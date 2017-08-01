@@ -15,8 +15,8 @@ const Selecao = ({
   deleteSelecao,
   editSelecao,
   enterSelecao,
-  // isAluno,
   isAlunoInSelecao,
+  isLoading,
   isLogged,
   isServidor,
   leaveSelecao,
@@ -35,12 +35,14 @@ const Selecao = ({
       <Divider horizontal style={{ margin: '1em 0em' }} />
       {isServidor ? (
         <FooterServidor
+          isLoading={isLoading}
           deleteSelecao={deleteSelecao}
           editSelecao={editSelecao}
           selecao={selecao}
         />
       ) : (
         <FooterAluno
+          isLoading={isLoading}
           enterSelecao={id => isLogged ? enterSelecao(id, usuario.idCriador) : showLogin()}
           leaveSelecao={id => leaveSelecao(id, usuario.idCriador)}
           selecao={selecao}
@@ -55,8 +57,8 @@ Selecao.propTypes = {
   deleteSelecao: PropTypes.func.isRequired,
   editSelecao: PropTypes.func.isRequired,
   enterSelecao: PropTypes.func.isRequired,
-  // isAluno: PropTypes.bool.isRequired,
   isAlunoInSelecao: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   isLogged: PropTypes.bool.isRequired,
   isServidor: PropTypes.bool.isRequired,
   leaveSelecao: PropTypes.func.isRequired,
@@ -66,7 +68,7 @@ Selecao.propTypes = {
 };
 
 const mapStateToProps = (state, { selecao }) => ({
-  // isAluno: selectors.isTypeUser('aluno'),
+  isLoading: selectors.isLoading(),
   isLogged: selectors.isLogged(),
   isServidor: selectors.isTypeUser('servidor'),
   isAlunoInSelecao: selectors.isInSelecao(selecao),
