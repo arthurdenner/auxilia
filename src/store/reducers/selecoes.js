@@ -13,7 +13,15 @@ export default handleActions({
 
   [actions.selecoes.fetch.resolve]: (state, { payload }) => payload,
 
-  [actions.selecoes.enter.resolve]: (state, { payload }) => payload, // fazer
+  [actions.selecoes.enter.resolve]: (state, { payload }) =>
+    state.map(selecao =>
+      selecao.idSelecao === payload.idSelecao ? {
+        ...selecao,
+        participantes: [
+          ...selecao.participantes,
+          payload.usuario,
+        ],
+      } : selecao),
 
   [actions.selecoes.leave.resolve]: (state, { payload }) => payload, // fazer
 }, []);

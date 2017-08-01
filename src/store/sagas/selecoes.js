@@ -71,32 +71,32 @@ function* deleteSelecao({ payload: { data, onSuccess, onError } }) {
 }
 
 function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
-  const response = yield call(API.create, `selecao/${idSelecao}/participantes`, Number(idUsuario));
+  const response = yield call(API.create, `selecao/${idSelecao}/participantes/`, { idUsuario: Number(idUsuario) });
 
   if (response.status === 201) {
     if (onSuccess) {
       onSuccess();
     }
 
-    yield put(actions.selecoes.enter.resolve(response.data));
+    yield put(actions.selecoes.enter.resolve({ idSelecao, usuario: response.data }));
   } else {
     if (onError) {
       onError();
     }
 
-    yield put(actions.selecoes.enter.resolve());
+    yield put(actions.selecoes.enter.error());
   }
 }
 
 function* leaveSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
-  const response = yield call(API.remove, `selecao/${idSelecao}/participantes`, Number(idUsuario));
+  const response = yield call(API.remove, `selecao/${idSelecao}/participantes/`, { idUsuario: Number(idUsuario) });
 
   if (response.status === 201) {
     if (onSuccess) {
       onSuccess();
     }
 
-    yield put(actions.selecoes.leave.resolve(response.data));
+    yield put(actions.selecoes.leave.resolve({ idSelecao, usuario: response.data }));
   } else {
     if (onError) {
       onError();
