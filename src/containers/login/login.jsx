@@ -47,12 +47,12 @@ class Login extends PureComponent {
         <FormLogin getFieldDecorator={getFieldDecorator} />
       ),
       footer: (
-        <div>
+        <div className={styles.footer}>
           <Button onClick={this.handleClose}>
             Cancelar
           </Button>
           <Button type="primary" icon="login" className={styles.button} onClick={this.handleSubmit}>
-            Entrar no sistema
+            Entrar
           </Button>
         </div>
       ),

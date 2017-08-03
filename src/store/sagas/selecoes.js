@@ -71,7 +71,11 @@ function* deleteSelecao({ payload: { data, onSuccess, onError } }) {
 }
 
 function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
-  const response = yield call(API.create, `selecao/${idSelecao}/participantes/`, { idUsuario: Number(idUsuario) });
+  const response = yield call(
+    API.create,
+    `selecao/${idSelecao}/participantes/`,
+    { idUsuario: Number(idUsuario) },
+  );
 
   if (response.status === 201) {
     if (onSuccess) {
@@ -89,7 +93,11 @@ function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, o
 }
 
 function* leaveSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
-  const response = yield call(API.remove, `selecao/${idSelecao}/participantes/`, { idUsuario: Number(idUsuario) });
+  const response = yield call(
+    API.remove,
+    `selecao/${idSelecao}/participantes/`,
+    { params: { idUsuario: Number(idUsuario) } },
+  );
 
   if (response.status === 201) {
     if (onSuccess) {
