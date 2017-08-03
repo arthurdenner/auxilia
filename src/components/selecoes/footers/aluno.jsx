@@ -5,7 +5,7 @@ import FlexElement from '~/components/flex-element';
 import styles from './footers.less';
 
 const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, isLoading, selecao }) => (
-  <FlexElement className={styles.buttons}>
+  <FlexElement className={styles.alunofooter}>
     {isAlunoInSelecao ? (
       <Button
         icon="calendar"

@@ -51,7 +51,11 @@ class Login extends PureComponent {
           <Button onClick={this.handleClose}>
             Cancelar
           </Button>
-          <Button type="primary" icon="login" className={styles.button} onClick={this.handleSubmit}>
+          <Button
+            type="primary" icon="login"
+            className={styles.button}
+            onClick={this.handleSubmit}
+          >
             Entrar
           </Button>
         </div>
