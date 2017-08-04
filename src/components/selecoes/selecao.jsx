@@ -26,12 +26,12 @@ const Selecao = ({
   usuario,
 }) => (
   <CollapseOpen title={selecao.nome} wrapClass={styles.selecao}>
-    {/* <p><strong>Autor: </strong>{selecao.criador.nome}</p>*/}
+    <p><strong>Autor: </strong>{selecao.criador}</p>
     <p><strong>Número de vagas: </strong>{selecao.vagas}</p>
     <p><strong>Data de Início: </strong>{formatDate(selecao.inicio)}</p>
     <p><strong>Data Final: </strong>{formatDate(selecao.fim)}</p>
     <p><strong>Descrição: </strong>{selecao.descricao}</p>
-    {/* <p><strong>Participantes: </strong>{selecao.participantes.length}</p>*/}
+    <p><strong>Participantes: </strong>{selecao.participantes.length}</p>
     <FlexElement column>
       <Divider horizontal style={{ margin: '1em 0em' }} />
       {isServidor ? (

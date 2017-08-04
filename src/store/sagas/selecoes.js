@@ -95,16 +95,15 @@ function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, o
 function* leaveSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
   const response = yield call(
     API.remove,
-    `selecao/${idSelecao}/participantes/`,
-    { params: { idUsuario: Number(idUsuario) } },
+    `selecao/${idSelecao}/participantes/${idUsuario}`,
   );
 
-  if (response.status === 201) {
+  if (response.status === 204) {
     if (onSuccess) {
       onSuccess();
     }
 
-    yield put(actions.selecoes.leave.resolve({ idSelecao, usuario: response.data }));
+    yield put(actions.selecoes.leave.resolve({ idSelecao, idUsuario: Number(idUsuario) }));
   } else {
     if (onError) {
       onError();

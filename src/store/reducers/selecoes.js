@@ -23,7 +23,13 @@ export default handleActions({
         ],
       } : selecao),
 
-  [actions.selecoes.leave.resolve]: (state, { payload }) => payload, // fazer
+  [actions.selecoes.leave.resolve]: (state, { payload }) =>
+    state.map(selecao =>
+      selecao.idSelecao === payload.idSelecao ? {
+        ...selecao,
+        participantes: filter(
+          part => part.idUsuario !== payload.idUsuario, selecao.participantes),
+      } : selecao),
 }, []);
 
 // export default handleActions({
