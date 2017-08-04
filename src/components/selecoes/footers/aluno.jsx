@@ -4,13 +4,14 @@ import { Button } from 'antd';
 import FlexElement from '~/components/flex-element';
 import styles from './footers.less';
 
-const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, selecao }) => (
-  <FlexElement className={styles.buttons}>
+const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, isLoading, selecao }) => (
+  <FlexElement className={styles.alunofooter}>
     {isAlunoInSelecao ? (
       <Button
         icon="calendar"
         className={styles.button}
-        onClick={() => leaveSelecao(selecao._id)}
+        loading={isLoading}
+        onClick={() => leaveSelecao(selecao.idSelecao)}
       >
         Sair da seleção
       </Button>
@@ -19,7 +20,8 @@ const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, selecao }) 
         icon="calendar"
         type="primary"
         className={styles.button}
-        onClick={() => enterSelecao(selecao._id)}
+        loading={isLoading}
+        onClick={() => enterSelecao(selecao.idSelecao)}
       >
         Entrar na seleção
       </Button>
@@ -30,6 +32,7 @@ const FooterAluno = ({ enterSelecao, leaveSelecao, isAlunoInSelecao, selecao }) 
 FooterAluno.propTypes = {
   enterSelecao: PropTypes.func.isRequired,
   isAlunoInSelecao: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   leaveSelecao: PropTypes.func.isRequired,
   selecao: PropTypes.object.isRequired,
 };

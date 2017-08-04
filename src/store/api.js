@@ -3,17 +3,25 @@ import { merge } from 'lodash';
 import { url } from '../constants';
 // import { getAuth } from './selectors';
 
-export const getOptions = (options = {}) => {
+// export const getOptions = (options = {}) => {
   // const auth = getAuth();
 
-  return merge({}, {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
+  // return merge({}, {
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //     Accept: 'application/json',
       // Authorization: `${auth.token_type} ${auth.access_token}`,
-    },
-  }, options);
-};
+    // },
+  // }, options);
+// };
+
+export const getOptions = (options = {}) => merge({}, {
+  headers: {
+    'Content-Type': 'application/json',
+    Accept: 'application/json',
+    // Authorization: `${auth.token_type} ${auth.access_token}`,
+  },
+}, options);
 
 export const create = (slug, data, options) =>
   post(`${url}/${slug}`, data, getOptions(options));

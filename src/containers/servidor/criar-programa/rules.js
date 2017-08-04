@@ -9,7 +9,7 @@ export const nomeRules = {
 export const descricaoRules = {
   rules: [
     { required: true, message: 'Campo obrigatório' },
-    { min: 50, message: 'O nome deve ter, ao menos, 50 caracteres' },
+    { min: 30, message: 'O nome deve ter, ao menos, 30 caracteres' },
     { max: 500, message: 'O nome deve ter, no máximo, 500 caracteres' },
   ],
 };

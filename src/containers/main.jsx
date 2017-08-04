@@ -16,6 +16,7 @@ const Main = () => (
     <Header className={styles.header}>
       <a className={styles.image} href="/">
         <img src="http://i.imgur.com/zoYZVLz.png" alt="AUXILIA" />
+        <span>AUXILIA</span>
       </a>
       <Topbar />
       <Login />

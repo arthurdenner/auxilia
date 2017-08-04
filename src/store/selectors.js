@@ -3,6 +3,7 @@ import { getData } from './configure-store';
 
 // App
 export const getSelectedTab = () => getData('app.selectedTab');
+export const isLoading = () => getData('app.loading');
 
 // Auth
 export const getAuth = () => getData('auth.data');
@@ -24,8 +25,9 @@ export const getSelecoes = () => getData('selecoes');
 // export const getMinhasSelecoes = () => filter(isUserCriador, getSelecoes()); // refazer
 export const getSelecao = idSelecao => find({ idSelecao }, getSelecoes());
 export const isInSelecao = (selecao) => {
+  const idUsuario = Number(getUser().idCriador);
   const participantes = getOr([], 'participantes', selecao);
-  return participantes.indexOf(getUser().idCriador) > -1;
+  return !!find({ idUsuario }, participantes);
 };
 
 // Modal

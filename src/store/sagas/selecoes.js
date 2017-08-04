@@ -1,54 +1,115 @@
-import notification from '~/helpers/notification';
 import { put, call, takeEvery } from 'redux-saga/effects';
 import actions from '../actions';
 import * as API from '../api';
 
-const FETCH_ERROR = 'Houve um erro na requisição.';
-
-function* fetchSelecoes() {
+function* fetchSelecoes({ onError }) {
   const response = yield call(API.read, 'selecao/');
 
   if (response.status === 200) {
     yield put(actions.selecoes.fetch.resolve(response.data));
   } else {
-    console.log(response);
-    yield put(actions.selecoes.fetch.resolve(new Error(FETCH_ERROR)));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.fetch.error());
   }
 }
 
-function* addSelecao({ payload }) {
-  const response = yield call(API.create, 'selecao/', payload);
+function* addSelecao({ payload: { data, onSuccess, onError } }) {
+  const response = yield call(API.create, 'selecao/', data);
 
   if (response.status === 201) {
-    notification('success', 'A seleção foi criada!');
+    if (onSuccess) {
+      onSuccess();
+    }
+
     yield put(actions.selecoes.add.resolve(response.data));
   } else {
-    console.log(response);
-    // yield put(actions.selecoes.add.resolve(new Error(FETCH_ERROR)));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.add.error());
   }
 }
 
-function* updateSelecao({ payload }) {
-  const response = yield call(API.update, `selecao/${payload.idSelecao}`, payload);
+function* updateSelecao({ payload: { data, onSuccess, onError } }) {
+  const response = yield call(API.update, `selecao/${data.idSelecao}`, data);
 
   if (response.status === 200) {
-    notification('success', 'A seleção foi atualizada!');
+    if (onSuccess) {
+      onSuccess();
+    }
+
     yield put(actions.selecoes.update.resolve(response.data));
   } else {
-    console.log(response);
-    // yield put(actions.selecoes.update.resolve(new Error(FETCH_ERROR), e));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.update.error());
   }
 }
 
-function* deleteSelecao({ payload }) {
-  const response = yield call(API.remove, `selecao/${payload}`);
+function* deleteSelecao({ payload: { data, onSuccess, onError } }) {
+  const response = yield call(API.remove, `selecao/${data}`);
 
   if (response.status === 204) {
-    notification('success', 'A seleção foi deletada!');
-    yield put(actions.selecoes.delete.resolve(payload));
+    if (onSuccess) {
+      onSuccess();
+    }
+
+    yield put(actions.selecoes.delete.resolve(data));
   } else {
-    console.log(response);
-    // yield put(actions.selecoes.delete.resolve(new Error(FETCH_ERROR), e));
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.delete.error());
+  }
+}
+
+function* enterSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
+  const response = yield call(
+    API.create,
+    `selecao/${idSelecao}/participantes/`,
+    { idUsuario: Number(idUsuario) },
+  );
+
+  if (response.status === 201) {
+    if (onSuccess) {
+      onSuccess();
+    }
+
+    yield put(actions.selecoes.enter.resolve({ idSelecao, usuario: response.data }));
+  } else {
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.enter.error());
+  }
+}
+
+function* leaveSelecao({ payload: { data: { idSelecao, idUsuario }, onSuccess, onError } }) {
+  const response = yield call(
+    API.remove,
+    `selecao/${idSelecao}/participantes/${idUsuario}`,
+  );
+
+  if (response.status === 204) {
+    if (onSuccess) {
+      onSuccess();
+    }
+
+    yield put(actions.selecoes.leave.resolve({ idSelecao, idUsuario: Number(idUsuario) }));
+  } else {
+    if (onError) {
+      onError();
+    }
+
+    yield put(actions.selecoes.leave.error());
   }
 }
 
@@ -57,4 +118,6 @@ export default function* () {
   yield takeEvery(actions.selecoes.add.request, addSelecao);
   yield takeEvery(actions.selecoes.update.request, updateSelecao);
   yield takeEvery(actions.selecoes.delete.request, deleteSelecao);
+  yield takeEvery(actions.selecoes.enter.request, enterSelecao);
+  yield takeEvery(actions.selecoes.leave.request, leaveSelecao);
 }

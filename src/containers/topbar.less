@@ -2,12 +2,38 @@
   line-height: 39px !important;
 }
 
+@media (max-width: 450px) {
+  .menu {
+    :global(.ant-menu) {
+      :global(.ant-menu-item) {
+        :global(.anticon) {
+          margin-right: 0 !important;
+        }
+        :global(.nav-text) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
 .nome {
   color: white;
   margin-right: 1em;
 
   &:hover {
     color: white;
+  }
+}
+
+@media (max-width: 360px) {
+  .nome {
+    & span {
+      width: 6em !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 }
 

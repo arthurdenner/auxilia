@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Icon } from 'antd';
 import FlexElement from '~/components/flex-element';
 
@@ -15,7 +16,7 @@ const styles = {
   },
 };
 
-const NotFound = ({ match: { params: { idSelecao } } }) => (
+const Selecao = ({ match: { params: { idSelecao } } }) => (
   <FlexElement full column align="center" justify="center" style={styles.container}>
     <FlexElement column align="center" justify="center" as="h2">
       <Icon type="frown" style={styles.icon} />
@@ -24,4 +25,8 @@ const NotFound = ({ match: { params: { idSelecao } } }) => (
   </FlexElement>
 );
 
-export default NotFound;
+Selecao.propTypes = {
+  match: PropTypes.object.isRequired,
+};
+
+export default Selecao;

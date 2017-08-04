@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Input } from 'antd';
 import { isEmpty } from 'lodash/fp';
+import filterByName from '~/helpers/filter-by-name';
+import notification from '~/helpers/notification';
 import CriarSelecao from '~/containers/servidor/criar-selecao';
 import EmptyContent from '~/components/empty-content';
 import FlexElement from '~/components/flex-element';
 import SelecoesList from '~/components/selecoes/selecoes-list';
-import filterByName from '~/helpers/filter-by-name';
 import * as selectors from '~/store/selectors';
 import actions from '~/store/actions';
 import styles from './selecoes.less';
@@ -24,13 +25,13 @@ class Selecoes extends PureComponent {
   state = { busca: '' };
 
   componentDidMount() {
-    const { changeTab, fetchProgramas, fetchSelecoes, programas } = this.props;
+    const { changeTab, fetchProgramas, fetchSelecoes } = this.props;
 
     changeTab('item_2');
-    if (isEmpty(programas)) {
-      fetchProgramas();
-      fetchSelecoes();
-    }
+    fetchProgramas();
+    fetchSelecoes({
+      onError: () => notification('error', 'Houve um erro na requisição!'),
+    });
   }
 
   handleBusca = ({ target: { value } }) => this.setState({ busca: value });
@@ -50,7 +51,12 @@ class Selecoes extends PureComponent {
             onChange={this.handleBusca}
           />
           {isServidor && (
-            <Button type="primary" icon="plus" onClick={showModal} className={styles.button}>
+            <Button
+              type="primary"
+              icon="plus"
+              onClick={showModal}
+              className={styles.button}
+            >
               Criar uma seleção
             </Button>
           )}

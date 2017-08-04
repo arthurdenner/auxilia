@@ -1,4 +1,8 @@
-export const appkey = 'auxilia';
+export const DEV = process.env.NODE_ENV !== 'production';
+
+export const Cache = {
+  KEY: DEV ? 'AUXILIA_DEV' : 'AUXILIA_PROD',
+};
 
 export const url = 'http://clevison.pythonanywhere.com/api';
 

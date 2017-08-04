@@ -26,14 +26,24 @@
   margin-right: 0.8em;
 }
 
-.footer {
-  border-top: 1px solid rgba(0,0,0,0.1);
-  margin-top: auto;
-  padding: 0.8em 1em;
-}
-
 .button {
   margin-left: 0.8em;
+}
+
+@media (max-width: 768px) {
+  .button {
+    margin-left: 0em !important;
+  }
+
+  .footer {
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+
+    :global(.ant-btn) {
+      width: 48% !important;
+    }
+  }
 }
 
 .modal {

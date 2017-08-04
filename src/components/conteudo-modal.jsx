@@ -10,7 +10,7 @@ const ConteudoModal = ({ config }) => (
       <h3 className={styles.headerTitle}>{config.title}</h3>
       <Icon type="close" onClick={config.handleClose} className={styles.icon} />
     </FlexElement>
-    <FlexElement full style={{ padding: '0.2em 1em' }}>
+    <FlexElement full style={{ padding: '0.2em 1em', overflow: 'auto' }}>
       {config.content}
     </FlexElement>
     {config.footer && (
