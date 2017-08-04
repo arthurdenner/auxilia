@@ -110,6 +110,7 @@ class CriarSelecao extends PureComponent {
           </Button>
         </div>
       ),
+      style: { height: '100%' },
     };
 
     return (

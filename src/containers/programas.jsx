@@ -50,7 +50,12 @@ class Programas extends PureComponent {
             onChange={this.handleBusca}
           />
           {isServidor && (
-            <Button type="primary" icon="plus" onClick={showModal} className={styles.button}>
+            <Button
+              type="primary"
+              icon="plus"
+              onClick={showModal}
+              className={styles.button}
+            >
               Criar um programa
             </Button>
           )}

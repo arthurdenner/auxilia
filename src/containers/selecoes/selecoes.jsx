@@ -51,7 +51,12 @@ class Selecoes extends PureComponent {
             onChange={this.handleBusca}
           />
           {isServidor && (
-            <Button type="primary" icon="plus" onClick={showModal} className={styles.button}>
+            <Button
+              type="primary"
+              icon="plus"
+              onClick={showModal}
+              className={styles.button}
+            >
               Criar uma seleção
             </Button>
           )}
