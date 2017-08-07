@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { F, T } from 'lodash/fp';
+import { F, T, flip, get } from 'lodash/fp';
 import actions from '../actions';
 
 export default combineReducers({
@@ -11,9 +11,6 @@ export default combineReducers({
     [actions.programas.add.request]: T,
     [actions.programas.add.resolve]: F,
     [actions.programas.add.error]: F,
-    [actions.programas.delete.request]: T,
-    [actions.programas.delete.resolve]: F,
-    [actions.programas.delete.error]: F,
     [actions.programas.update.request]: T,
     [actions.programas.update.resolve]: F,
     [actions.programas.update.error]: F,
@@ -21,17 +18,24 @@ export default combineReducers({
     [actions.selecoes.add.request]: T,
     [actions.selecoes.add.resolve]: F,
     [actions.selecoes.add.error]: F,
-    [actions.selecoes.delete.request]: T,
-    [actions.selecoes.delete.resolve]: F,
-    [actions.selecoes.delete.error]: F,
     [actions.selecoes.update.request]: T,
     [actions.selecoes.update.resolve]: F,
     [actions.selecoes.update.error]: F,
-    [actions.selecoes.enter.request]: T,
-    [actions.selecoes.enter.resolve]: F,
-    [actions.selecoes.enter.error]: F,
-    [actions.selecoes.leave.request]: T,
-    [actions.selecoes.leave.resolve]: F,
-    [actions.selecoes.leave.error]: F,
   }, false),
+  loadingPrograma: handleActions({
+    [actions.programas.delete.request]: flip(get('payload.data')),
+    [actions.programas.delete.resolve]: () => null,
+    [actions.programas.delete.error]: () => null,
+  }, null),
+  loadingSelecao: handleActions({
+    [actions.selecoes.delete.request]: flip(get('payload.data')),
+    [actions.selecoes.delete.resolve]: () => null,
+    [actions.selecoes.delete.error]: () => null,
+    [actions.selecoes.enter.request]: flip(get('payload.data.idSelecao')),
+    [actions.selecoes.enter.resolve]: () => null,
+    [actions.selecoes.enter.error]: () => null,
+    [actions.selecoes.leave.request]: flip(get('payload.data.idSelecao')),
+    [actions.selecoes.leave.resolve]: () => null,
+    [actions.selecoes.leave.error]: () => null,
+  }, null),
 });

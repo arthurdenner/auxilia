@@ -69,7 +69,7 @@ Selecao.propTypes = {
 };
 
 const mapStateToProps = (state, { selecao }) => ({
-  isLoading: selectors.isLoading(),
+  isLoading: selectors.isLoadingBtnSelecao(selecao.idSelecao),
   isLogged: selectors.isLogged(),
   isServidor: selectors.isTypeUser('servidor'),
   isAlunoInSelecao: selectors.isInSelecao(selecao),

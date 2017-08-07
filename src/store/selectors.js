@@ -4,6 +4,8 @@ import { getData } from './configure-store';
 // App
 export const getSelectedTab = () => getData('app.selectedTab');
 export const isLoading = () => getData('app.loading');
+export const isLoadingBtnSelecao = idSelecao => idSelecao === getData('app.loadingSelecao');
+export const isLoadingBtnPrograma = idPrograma => idPrograma === getData('app.loadingPrograma');
 
 // Auth
 export const getAuth = () => getData('auth.data');

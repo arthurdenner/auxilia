@@ -43,8 +43,8 @@ Programa.propTypes = {
   programa: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = () => ({
-  isLoading: selectors.isLoading(),
+const mapStateToProps = (state, { programa }) => ({
+  isLoading: selectors.isLoadingBtnPrograma(programa.idPrograma),
   isServidor: selectors.isTypeUser('servidor'),
 });
 

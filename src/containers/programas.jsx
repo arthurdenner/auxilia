@@ -45,7 +45,6 @@ class Programas extends PureComponent {
       <div className={styles.container}>
         <FlexElement full justify="space-between" className={styles.topbar}>
           <Input.Search
-            className={styles.busca}
             placeholder="Buscar programa..."
             onChange={this.handleBusca}
           />

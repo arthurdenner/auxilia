@@ -44,9 +44,11 @@ class Selecoes extends PureComponent {
 
     return (
       <div className={styles.container}>
-        <FlexElement full justify="space-between" className={styles.topbar}>
+        <FlexElement
+          full justify="space-between"
+          className={styles.topbar}
+        >
           <Input.Search
-            className={styles.busca}
             placeholder="Buscar seleção..."
             onChange={this.handleBusca}
           />
